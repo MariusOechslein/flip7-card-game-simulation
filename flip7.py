@@ -65,7 +65,7 @@ class Game(BaseModel):
             return
 
         next_player = self.next_player()
-        next_player.play()
+        next_player.play(self)
 
     def next_player(self):
         next_player = self.players[0]
@@ -114,7 +114,7 @@ class Player(BaseModel):
     second_chance: bool = Field(default=False, description="Boolean indicating if the player has a second chance special card to use against busting.")
     name: str = Field(default="Unknown Player", description="Name of the player.")
 
-    def play(self):
+    def play(self, game: Game):
         print("Player:", self.name, "turn.")
         if self.done:
             return
@@ -175,7 +175,6 @@ class Player(BaseModel):
 
 
 if __name__ == "__main__":
-    global game
     players_state = [
         Player(hand={
             "normal": [],
