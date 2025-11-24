@@ -2,13 +2,14 @@
 
 import flip7
 import copy
+from collections import deque
 
-single_player = [
-    flip7.Player()
-]
 
 def test_normal_card_deck():
-    game = flip7.Game(single_player, flip7.card_decks["normal_cards_only"])
+    single_player = [
+        flip7.Player()
+    ]
+    game = flip7.Game(players=deque(single_player), deck_remaining=flip7.card_decks["normal_cards_only"])
     expected_list = [
         *["0"] * 1,
         *["1"] * 1,
@@ -31,7 +32,7 @@ def test_normal_card_deck():
 
 def test_draw_card():
     players = [flip7.Player()]
-    game = flip7.Game(players, flip7.card_decks["normal_cards_only"])
+    game = flip7.Game(players=deque(players), deck_remaining=flip7.card_decks["normal_cards_only"])
     num_cards_before = len(game.deck_remaining)
     card = game.draw_card()
     if len(game.deck_remaining) == num_cards_before - 1:
@@ -41,7 +42,7 @@ def test_draw_card():
 
 def test_next_player_queue_setup():
     players = [flip7.Player(name="Marius"), flip7.Player(name="Thea")]
-    game = flip7.Game(players, flip7.card_decks["normal_cards_only"])
+    game = flip7.Game(players=deque(players), deck_remaining=flip7.card_decks["normal_cards_only"])
     first_player = game.next_player()
     second_player = game.next_player()
     third_player = game.next_player()
@@ -67,7 +68,7 @@ def test_valid_game_state_setups():
         )
     ]
     try:
-        game = flip7.Game(players_state, flip7.card_decks["normal_cards_only"])
+        game = flip7.Game(players=deque(players_state), deck_remaining=flip7.card_decks["normal_cards_only"])
         print("Valid game state setup --- Passed")
     except:
         print("Valid game state setup --- Error")
@@ -92,7 +93,7 @@ def test_game_state_setups():
         faulty_player_state = copy.deepcopy(players_state)
         faulty_player_state[0].hand["normal"] = ["10"]
 
-        game = flip7.Game(faulty_player_state, flip7.card_decks["normal_cards_only"])
+        game = flip7.Game(players=deque(faulty_player_state), deck_remaining=flip7.card_decks["normal_cards_only"])
         print("Faulty game state setup --- Error")
     except:
         print("Faulty game state setup --- Passed")
