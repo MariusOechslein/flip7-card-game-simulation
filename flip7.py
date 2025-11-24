@@ -3,6 +3,8 @@
 import random
 from collections import deque # For next player rotations
 import copy
+from pydantic import BaseModel, field_validator, model_validator
+from typing import List, Iterable
 
 card_decks = {
     "normal_cards_only": [
@@ -22,19 +24,36 @@ card_decks = {
     ]
 }
 
-class Game:
-    finished = False
-    next_player_queue = [] # Who comes next? Important for draw 3 special card.
-    players = []
-    deck_remaining = []
+class Game(BaseModel):
+    finished: bool = False
+    players: deque
+    deck_remaining: List[str]
 
-    def __init__(self, players_state: list, deck_state: list):
-        self.finished = False
+    @field_validator("players", mode="before")
+    @classmethod
+    def check_players(cls, v):
+        if not isinstance(v, deque):
+            raise ValueError("players must be a deque")
+        if len(v) < 1:
+            raise ValueError("must have at least 1 player")
+        return v
 
-        self.validate_game_state(players_state, deck_state)
+    @model_validator(mode="after")
+    def validate_game_state(self):
+        """Validating game state of players hands and deck remaining."""
+        all_player_cards = [player.hand.normal for player in self.players]
+        flat_all_player_cards = [int(item) for sublist in all_player_cards for item in sublist] # Flat out nested lists # TODO: Risky to do int() here. Should be solved with strong typing by pydantic models.
+        deck_state_values = [int(card) for card in self.deck_remaining]
 
-        self.players = deque(copy.deepcopy(players_state))
-        self.deck_remaining = copy.deepcopy(deck_state)
+        all_value_cards_in_play = deck_state_values + flat_all_player_cards
+        if any(n < 0 or n > 12 for n in all_value_cards_in_play):
+            raise ValueError("Error in validate_game_state(): Value below 0 or above 12 in game_state.")
+        len_all_value_cards_in_play = len(all_value_cards_in_play)
+        if len_all_value_cards_in_play != 79:
+            raise ValueError("Error in validate_game_state(): Not 79 value cards in play.")
+        if sum(all_value_cards_in_play) != 650:
+            raise ValueError("Error in validate_game_state(): Sum of value cards")
+        return self
 
     def next(self):
         if self.finished:
@@ -59,40 +78,36 @@ class Game:
         self.deck_remaining.remove(card)
         return card
 
-    def validate_game_state(self, players_state, deck_state):
-        all_player_cards = [player.hand["normal"] for player in players_state]
-        flat_all_player_cards = [int(item) for sublist in all_player_cards for item in sublist] # Flat out nested lists # TODO: Risky to do int() here. Should be solved with strong typing by pydantic models.
-        deck_state_values = [int(card) for card in deck_state]
-
-        all_value_cards_in_play = deck_state_values + flat_all_player_cards
-        if any(n < 0 or n > 12 for n in all_value_cards_in_play):
-            raise ValueError("Error in validate_game_state(): Value below 0 or above 12 in game_state.")
-        len_all_value_cards_in_play = len(all_value_cards_in_play)
-        if len_all_value_cards_in_play != 79:
-            raise ValueError("Error in validate_game_state(): Not 79 value cards in play.")
-        if sum(all_value_cards_in_play) != 650:
-            raise ValueError("Error in validate_game_state(): Sum of value cards")
 
 
-class Player:
-    done = False
-    turns_remaining = 1 # Default 1. Handles special "draw 3" card.
-    hand = {
+class Hand(BaseModel):
+    normal: List[str]
+    bonus: List[str]
+
+    @field_validator("normal", mode="before")
+    def check_normal(cls, v):
+        for card in v:
+            if not card in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]:
+                raise ValueError("Normal Cards not valid")
+        return v
+
+    @field_validator("bonus", mode="before")
+    def check_bonus(cls, v):
+        for card in v:
+            if not card in ["x2", "+2", "+4", "+6", "+8", "+10"]:
+                raise ValueError("Cards must be numeric strings")
+        return v
+
+
+class Player(BaseModel):
+    done: bool = False
+    turns_remaining: int = 1 # Default 1. Handles special "draw 3" card.
+    hand: Hand = {
         "normal": [],
         "bonus": [], # multiplication before addition!
     }
-    second_chance = False # Special card flag. Other special cards are played directly after receiving.
-    name = ""
-
-    def __init__(self, done=False, turns_remaining=1, hand={"normal":[], "bonus":[]}, second_chance=1, name="default"):
-        # TODO: Pydantic validation of parameters through model.
-
-        self.done = done
-        self.turns_remaining = turns_remaining
-        self.hand = hand
-        self.second_chance = second_chance
-        self.name = name
-
+    second_chance: bool = False # Special card flag. Other special cards are played directly after receiving.
+    name: str = ""
 
     def play(self):
         print("Player:", self.name, "turn.")
@@ -105,12 +120,12 @@ class Player:
 
         drawn_card = game.draw_card()
         if drawn_card in ["0","1","2","3","4","5","6","7","8","9","10","11","12"]:
-            self.hand["normal"].append(drawn_card)
+            self.hand.normal.append(drawn_card)
         else:
             # TODO: Handle non-normal cards
             pass
         print("Card drawn:", drawn_card)
-        print("Hand:", self.hand["normal"])
+        print("Hand:", self.hand.normal)
 
 
     def decide_draw(self):
@@ -138,8 +153,10 @@ if __name__ == "__main__":
         name = "Thea"
         )
     ]
-    game = Game(players_state, card_decks["normal_cards_only"])
-    
+    game = Game(
+        players = deque(players_state),
+        deck_remaining = card_decks["normal_cards_only"]
+    )
 
     rounds_played = 0
     while not game.finished:
