@@ -4,7 +4,7 @@ import random
 from collections import deque # For next player rotations
 import copy
 from pydantic import BaseModel, field_validator, model_validator, Field
-from typing import List, Iterable
+from typing import List
 
 card_decks = {
     "normal_cards_only": [
@@ -78,6 +78,11 @@ class Game(BaseModel):
         self.deck_remaining.remove(card)
         return card
 
+    def game_summary(self):
+        print("Player scores:")
+        for i, player in enumerate(self.players):
+            print("Player", str(i), "score:", player.count_score(), "hand:", player.hand.normal, "bonus:", player.hand.bonus, "busted:", player.busted)
+
 
 
 class Hand(BaseModel):
@@ -101,6 +106,7 @@ class Hand(BaseModel):
 
 class Player(BaseModel):
     done: bool = Field(default=False, description="Boolean indicating if the player is done playing this round.")
+    busted: bool = Field(default=False, description="Boolean indicating if the player has busted this round.")
     turns_remaining: int = Field(default=1, description="Number of turns remaining for the player in the current round. Important for special 'draw 3' card.")
     hand: Hand = Field(default=Hand(), description="Player's hand containing normal and bonus cards.")
     second_chance: bool = Field(default=False, description="Boolean indicating if the player has a second chance special card to use against busting.")
@@ -124,12 +130,37 @@ class Player(BaseModel):
         print("Card drawn:", drawn_card)
         print("Hand:", self.hand.normal)
 
+        self.done = self.check_bust()
+
+    def check_bust(self):
+        # Check if list is same length after removing duplicates
+        if len(self.hand.normal) != len(set(self.hand.normal)):
+            if self.second_chance:
+                print("Player", self.name, "used second chance to avoid bust.")
+                self.hand.normal = list(set(self.hand.normal)) # Remove duplicate
+                self.second_chance = False
+            else:
+                self.busted = True
+                print("Player", self.name, "busted!")
+                self.done = True
 
     def decide_draw(self):
         return True # TODO
 
     def count_score(self):
-        pass
+        if self.busted:
+            return 0 
+
+        total = 0
+        for card in self.hand.normal:
+            total += int(card)
+
+        if "x2" in self.hand.bonus: # Punctuation before addition of bonuses
+            total *= 2
+            self.hand.bonus.remove("x2")
+        for card in self.hand.bonus:
+            total += int(card.replace("+", ""))
+        return total
 
 
 
@@ -162,7 +193,8 @@ if __name__ == "__main__":
         print()
 
         rounds_played += 1
-        if rounds_played > 2:
+        if rounds_played > 5:
             game.finished = True
+    game.game_summary()
 
 
