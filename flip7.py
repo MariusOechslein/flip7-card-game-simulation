@@ -3,7 +3,7 @@
 import random
 from collections import deque # For next player rotations
 import copy
-from pydantic import BaseModel, field_validator, model_validator
+from pydantic import BaseModel, field_validator, model_validator, Field
 from typing import List, Iterable
 
 card_decks = {
@@ -25,9 +25,9 @@ card_decks = {
 }
 
 class Game(BaseModel):
-    finished: bool = False
-    players: deque
-    deck_remaining: List[str]
+    finished: bool = Field(default=False, description="Boolean indicating if the game is finished.")
+    players: deque = Field(..., description="Deque of Player objects representing the players in the game and turn order.")
+    deck_remaining: List[str] = Field(..., description="List of strings representing the remaining cards in the deck.")
 
     @field_validator("players", mode="before")
     @classmethod
@@ -81,8 +81,8 @@ class Game(BaseModel):
 
 
 class Hand(BaseModel):
-    normal: List[str]
-    bonus: List[str]
+    normal: List[str] = Field(default=[], description="List of normal cards in hand.")
+    bonus: List[str] = Field(default=[], description="List of bonus cards in hand.")
 
     @field_validator("normal", mode="before")
     def check_normal(cls, v):
@@ -100,14 +100,11 @@ class Hand(BaseModel):
 
 
 class Player(BaseModel):
-    done: bool = False
-    turns_remaining: int = 1 # Default 1. Handles special "draw 3" card.
-    hand: Hand = {
-        "normal": [],
-        "bonus": [], # multiplication before addition!
-    }
-    second_chance: bool = False # Special card flag. Other special cards are played directly after receiving.
-    name: str = ""
+    done: bool = Field(default=False, description="Boolean indicating if the player is done playing this round.")
+    turns_remaining: int = Field(default=1, description="Number of turns remaining for the player in the current round. Important for special 'draw 3' card.")
+    hand: Hand = Field(default=Hand(), description="Player's hand containing normal and bonus cards.")
+    second_chance: bool = Field(default=False, description="Boolean indicating if the player has a second chance special card to use against busting.")
+    name: str = Field(default="Unknown Player", description="Name of the player.")
 
     def play(self):
         print("Player:", self.name, "turn.")
