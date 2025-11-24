@@ -21,7 +21,26 @@ card_decks = {
         *["10"] * 10,
         *["11"] * 11,
         *["12"] * 12,
-    ]
+    ],
+    "full_deck": [
+        *["0"] * 1,
+        *["1"] * 1,
+        *["2"] * 2,
+        *["3"] * 3,
+        *["4"] * 4,
+        *["5"] * 5,
+        *["6"] * 6,
+        *["7"] * 7,
+        *["8"] * 8,
+        *["9"] * 9,
+        *["10"] * 10,
+        *["11"] * 11,
+        *["12"] * 12,
+        "x2", "+2", "+4", "+6", "+8", "+10",
+        *["freeze"] * 3,
+        *["second_chance"] * 3,
+        *["draw_3"] * 3,
+    ],
 }
 
 class Game(BaseModel):
@@ -37,23 +56,6 @@ class Game(BaseModel):
         if len(v) < 1:
             raise ValueError("must have at least 1 player")
         return v
-
-    @model_validator(mode="after")
-    def validate_game_state(self):
-        """Validating game state of players hands and deck remaining."""
-        all_player_cards = [player.hand.normal for player in self.players]
-        flat_all_player_cards = [int(item) for sublist in all_player_cards for item in sublist] # Flat out nested lists # TODO: Risky to do int() here. Should be solved with strong typing by pydantic models.
-        deck_state_values = [int(card) for card in self.deck_remaining]
-
-        all_value_cards_in_play = deck_state_values + flat_all_player_cards
-        if any(n < 0 or n > 12 for n in all_value_cards_in_play):
-            raise ValueError("Error in validate_game_state(): Value below 0 or above 12 in game_state.")
-        len_all_value_cards_in_play = len(all_value_cards_in_play)
-        if len_all_value_cards_in_play != 79:
-            raise ValueError("Error in validate_game_state(): Not 79 value cards in play.")
-        if sum(all_value_cards_in_play) != 650:
-            raise ValueError("Error in validate_game_state(): Sum of value cards")
-        return self
 
     def next(self):
         if self.finished:
@@ -124,9 +126,17 @@ class Player(BaseModel):
         drawn_card = game.draw_card()
         if drawn_card in ["0","1","2","3","4","5","6","7","8","9","10","11","12"]:
             self.hand.normal.append(drawn_card)
-        else:
-            # TODO: Handle non-normal cards
+        elif drawn_card in ["x2", "+2", "+4", "+6", "+8", "+10"]:
+            self.hand.bonus.append(drawn_card)
+        elif drawn_card == "second_chance":
+            self.second_chance = True
+        elif drawn_card == "freeze":
             pass
+        elif drawn_card == "draw_3":
+            pass
+        else:
+            raise ValueError("Drawn card not valid:", drawn_card)
+        
         print("Card drawn:", drawn_card)
         print("Hand:", self.hand.normal)
 
@@ -183,7 +193,7 @@ if __name__ == "__main__":
     ]
     game = Game(
         players = deque(players_state),
-        deck_remaining = card_decks["normal_cards_only"]
+        deck_remaining = card_decks["full_deck"]
     )
 
     rounds_played = 0
