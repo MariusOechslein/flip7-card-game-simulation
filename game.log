@@ -1,71 +1,39 @@
-2025-11-25 12:48:55,605 - __main__ - INFO - Player: Marius turn.
-2025-11-25 12:48:55,605 - __main__ - INFO - Card drawn: 12
-2025-11-25 12:48:55,605 - __main__ - INFO - Hand: []
-2025-11-25 12:48:55,605 - __main__ - INFO - len deck remaining: 93.
-2025-11-25 12:48:55,605 - __main__ - INFO - Player: Thea turn.
-2025-11-25 12:48:55,605 - __main__ - INFO - Card drawn: 6
-2025-11-25 12:48:55,605 - __main__ - INFO - Hand: []
-2025-11-25 12:48:55,605 - __main__ - INFO - len deck remaining: 92.
-2025-11-25 12:48:55,605 - __main__ - INFO - Player: Marius turn.
-2025-11-25 12:48:55,605 - __main__ - INFO - Card drawn: 7
-2025-11-25 12:48:55,605 - __main__ - INFO - Hand: ['12']
-2025-11-25 12:48:55,605 - __main__ - INFO - len deck remaining: 91.
-2025-11-25 12:48:55,605 - __main__ - INFO - Player: Thea turn.
-2025-11-25 12:48:55,605 - __main__ - INFO - Card drawn: 7
-2025-11-25 12:48:55,605 - __main__ - INFO - Hand: ['6']
-2025-11-25 12:48:55,605 - __main__ - INFO - len deck remaining: 90.
-2025-11-25 12:48:55,605 - __main__ - INFO - Player: Marius turn.
-2025-11-25 12:48:55,605 - __main__ - INFO - Card drawn: 11
-2025-11-25 12:48:55,605 - __main__ - INFO - Hand: ['12', '7']
-2025-11-25 12:48:55,605 - __main__ - INFO - len deck remaining: 89.
-2025-11-25 12:48:55,605 - __main__ - INFO - Player: Thea turn.
-2025-11-25 12:48:55,605 - __main__ - INFO - Card drawn: 11
-2025-11-25 12:48:55,605 - __main__ - INFO - Hand: ['6', '7']
-2025-11-25 12:48:55,605 - __main__ - INFO - len deck remaining: 88.
-2025-11-25 12:48:55,605 - __main__ - INFO - Player: Marius turn.
-2025-11-25 12:48:55,606 - __main__ - INFO - Card drawn: +8
-2025-11-25 12:48:55,606 - __main__ - INFO - Hand: ['12', '7', '11']
-2025-11-25 12:48:55,606 - __main__ - INFO - len deck remaining: 87.
-2025-11-25 12:48:55,606 - __main__ - INFO - Player: Thea turn.
-2025-11-25 12:48:55,606 - __main__ - INFO - Card drawn: 5
-2025-11-25 12:48:55,606 - __main__ - INFO - Hand: ['6', '7', '11']
-2025-11-25 12:48:55,606 - __main__ - INFO - len deck remaining: 86.
-2025-11-25 12:48:55,606 - __main__ - INFO - Player: Marius turn.
-2025-11-25 12:48:55,606 - __main__ - INFO - Card drawn: +2
-2025-11-25 12:48:55,606 - __main__ - INFO - Hand: ['12', '7', '11']
-2025-11-25 12:48:55,606 - __main__ - INFO - len deck remaining: 85.
-2025-11-25 12:48:55,606 - __main__ - INFO - Player: Thea turn.
-2025-11-25 12:48:55,606 - __main__ - INFO - Card drawn: 12
-2025-11-25 12:48:55,606 - __main__ - INFO - Hand: ['6', '7', '11', '5']
-2025-11-25 12:48:55,606 - __main__ - INFO - len deck remaining: 84.
-2025-11-25 12:48:55,606 - __main__ - INFO - Player: Marius turn.
-2025-11-25 12:48:55,606 - __main__ - INFO - Card drawn: 8
-2025-11-25 12:48:55,606 - __main__ - INFO - Hand: ['12', '7', '11']
-2025-11-25 12:48:55,606 - __main__ - INFO - len deck remaining: 83.
-2025-11-25 12:48:55,606 - __main__ - INFO - Player: Thea turn.
-2025-11-25 12:48:55,606 - __main__ - INFO - Card drawn: 9
-2025-11-25 12:48:55,606 - __main__ - INFO - Hand: ['6', '7', '11', '5', '12']
-2025-11-25 12:48:55,606 - __main__ - INFO - len deck remaining: 82.
-2025-11-25 12:48:55,606 - __main__ - INFO - Player: Marius turn.
-2025-11-25 12:48:55,606 - __main__ - INFO - Card drawn: 12
-2025-11-25 12:48:55,606 - __main__ - INFO - Hand: ['12', '7', '11', '8']
-2025-11-25 12:48:55,606 - __main__ - INFO - Player Marius busted!
-2025-11-25 12:48:55,606 - __main__ - INFO - len deck remaining: 81.
-2025-11-25 12:48:55,606 - __main__ - INFO - Player: Thea turn.
-2025-11-25 12:48:55,606 - __main__ - INFO - Card drawn: 8
-2025-11-25 12:48:55,606 - __main__ - INFO - Hand: ['6', '7', '11', '5', '12', '9']
-2025-11-25 12:48:55,606 - __main__ - INFO - len deck remaining: 80.
-2025-11-25 12:48:55,606 - __main__ - INFO - len deck remaining: 80.
-2025-11-25 12:48:55,607 - __main__ - INFO - Player: Thea turn.
-2025-11-25 12:48:55,607 - __main__ - INFO - Card drawn: 10
-2025-11-25 12:48:55,607 - __main__ - INFO - Hand: ['6', '7', '11', '5', '12', '9', '8']
-2025-11-25 12:48:55,607 - __main__ - INFO - len deck remaining: 79.
-2025-11-25 12:48:55,607 - __main__ - INFO - len deck remaining: 79.
-2025-11-25 12:48:55,607 - __main__ - INFO - Player: Thea turn.
-2025-11-25 12:48:55,607 - __main__ - INFO - Card drawn: 11
-2025-11-25 12:48:55,607 - __main__ - INFO - Hand: ['6', '7', '11', '5', '12', '9', '8', '10']
-2025-11-25 12:48:55,607 - __main__ - INFO - Player Thea busted!
-2025-11-25 12:48:55,607 - __main__ - INFO - len deck remaining: 78.
-2025-11-25 12:48:55,607 - __main__ - INFO - Player scores:
-2025-11-25 12:48:55,607 - __main__ - INFO - Player 0 score: 0 hand: ['12', '7', '11', '8', '12'] bonus: ['+8', '+2'] special_cards_log: [] busted: True
-2025-11-25 12:48:55,607 - __main__ - INFO - Player 1 score: 0 hand: ['6', '7', '11', '5', '12', '9', '8', '10', '11'] bonus: [] special_cards_log: [] busted: True
+2025-11-25 14:12:48,840 - __main__ - INFO - Player: Marius turn.
+2025-11-25 14:12:48,840 - __main__ - INFO - Card drawn: +6
+2025-11-25 14:12:48,841 - __main__ - INFO - len deck remaining: 93.
+2025-11-25 14:12:48,841 - __main__ - INFO - Player: Thea turn.
+2025-11-25 14:12:48,841 - __main__ - INFO - Card drawn: draw_3
+2025-11-25 14:12:48,841 - __main__ - INFO - Player Thea gave draw 3 to player Marius
+2025-11-25 14:12:48,841 - __main__ - INFO - Player: Marius turn.
+2025-11-25 14:12:48,841 - __main__ - INFO - Card drawn: 5
+2025-11-25 14:12:48,841 - __main__ - INFO - Hand: []
+2025-11-25 14:12:48,841 - __main__ - INFO - Player: Marius turn.
+2025-11-25 14:12:48,841 - __main__ - INFO - Card drawn: 11
+2025-11-25 14:12:48,841 - __main__ - INFO - Hand: []
+2025-11-25 14:12:48,841 - __main__ - INFO - Player: Marius turn.
+2025-11-25 14:12:48,841 - __main__ - INFO - Card drawn: draw_3
+2025-11-25 14:12:48,841 - __main__ - INFO - Hand: []
+2025-11-25 14:12:48,841 - __main__ - INFO - len deck remaining: 89.
+2025-11-25 14:12:48,841 - __main__ - INFO - Player: Marius turn.
+2025-11-25 14:12:48,841 - __main__ - INFO - Card drawn: 9
+2025-11-25 14:12:48,841 - __main__ - INFO - len deck remaining: 88.
+2025-11-25 14:12:48,841 - __main__ - INFO - Player: Thea turn.
+2025-11-25 14:12:48,841 - __main__ - INFO - Card drawn: 8
+2025-11-25 14:12:48,841 - __main__ - INFO - len deck remaining: 87.
+2025-11-25 14:12:48,841 - __main__ - INFO - Player: Marius turn.
+2025-11-25 14:12:48,841 - __main__ - INFO - Card drawn: 4
+2025-11-25 14:12:48,841 - __main__ - INFO - len deck remaining: 86.
+2025-11-25 14:12:48,841 - __main__ - INFO - Player: Thea turn.
+2025-11-25 14:12:48,841 - __main__ - INFO - Card drawn: 9
+2025-11-25 14:12:48,841 - __main__ - INFO - len deck remaining: 85.
+2025-11-25 14:12:48,841 - __main__ - INFO - Player: Marius turn.
+2025-11-25 14:12:48,841 - __main__ - INFO - Card drawn: 8
+2025-11-25 14:12:48,841 - __main__ - INFO - len deck remaining: 84.
+2025-11-25 14:12:48,842 - __main__ - INFO - Player: Thea turn.
+2025-11-25 14:12:48,842 - __main__ - INFO - Card drawn: 8
+2025-11-25 14:12:48,842 - __main__ - INFO - Player Thea busted.
+2025-11-25 14:12:48,842 - __main__ - INFO - len deck remaining: 83.
+2025-11-25 14:12:48,842 - __main__ - INFO - Max turns reached, ending game to avoid infinite loop.
+2025-11-25 14:12:48,842 - __main__ - INFO - Player scores:
+2025-11-25 14:12:48,842 - __main__ - INFO - Player 0 score: 27 hand: ['9', '4', '8'] bonus: ['+6'] special_cards_log: [] busted: False
+2025-11-25 14:12:48,842 - __main__ - INFO - Player 1 score: 0 hand: ['8', '9', '8'] bonus: [] special_cards_log: ['draw_3'] busted: True

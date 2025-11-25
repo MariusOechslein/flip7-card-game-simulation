@@ -90,17 +90,47 @@ class Game(BaseModel):
 
     def next(self):
         if self.finished:
-            logger.info(f"Game is over.")
-            for i, player in enumerate(self.players):
-                logger.info(f"Player {str(i)} score: {player.count_score()}")
             return
 
-        next_player = self.next_player()
-        next_player.play(game=self)
+        player = self.get_next_player()
 
-        self.finished = self.check_finished()
+        self._execute_player_turn(player)
 
-    def next_player(self):
+        self.finished = self.check_game_finished()
+
+    def _execute_player_turn(self, player):
+        if player.done or player.busted:
+            return
+        logger.info(f"Player: {player.name} turn.")
+
+        drawn_card = self.draw_card()
+        logger.info(f"Card drawn: {drawn_card}")
+
+        player.receive_card(drawn_card)
+        busted: bool = player.check_bust()
+        if busted:
+            if player.second_chance:
+                player.second_chance = False
+                player.hand.normal.pop() # Assumes last cards are appended at the end.
+                logger.info(f"Player {player.name} busted but used second chance.")
+            else:
+                player.busted = True
+                player.done = True
+                logger.info(f"Player {player.name} busted.")
+
+        if drawn_card in SPECIAL_CARDS:
+            if drawn_card == "freeze":
+                player_id_to_freeze: str = player.decide_freeze()
+                self.apply_freeze(player_id_to_freeze)
+            if drawn_card == "draw_3":
+                player_id_to_draw3: str = player.decide_draw_3(self)
+                self.apply_draw_3(player_id_to_draw3)
+            if drawn_card == "second_chance":
+                player.second_chance = True # Always applied to player who draws it
+                logger.info(f"Player {player.name} received second chance special card.")
+
+
+    def get_next_player(self):
         next_player = self.players[0]
         self.players.rotate(-1)
         return next_player
@@ -110,17 +140,12 @@ class Game(BaseModel):
         return card
 
     def apply_draw_3(self, to_player_id: str):
-        for player in self.players:
-            if player.id == to_player_id:
-                player.in_draw_3 = True
-                player.play(game=self)
-                player.play(game=self)
-                player.play(game=self)
-                player.in_draw_3 = False
-                return
-        raise ValueError("Error: Player with id", to_player_id, "not found for draw 3 card.")
+        pass
 
-    def check_finished(self):
+    def apply_freeze(self, to_player_id: str):
+        pass # TODO
+
+    def check_game_finished(self):
         all_done = all(player.done or player.busted for player in self.players)
         if all_done:
             return True
@@ -129,10 +154,11 @@ class Game(BaseModel):
             return True
         return False
 
+
     def game_summary(self):
         logger.info(f"Player scores:")
         for i, player in enumerate(self.players):
-            logger.info(f"Player {str(i)} score: {player.count_score()} hand: {player.hand.normal} bonus: {player.hand.bonus} special_cards_log: {player.hand.special_cards_log} busted: {player.busted}")
+            logger.info(f"Player {str(i)} score: {count_score(player)} hand: {player.hand.normal} bonus: {player.hand.bonus} special_cards_log: {player.hand.special_cards_log} busted: {player.busted}")
 
 
 
@@ -172,57 +198,26 @@ class Player(BaseModel):
     second_chance: bool = Field(default=False, description="Boolean indicating if the player has a second chance special card to use against busting.")
     name: str = Field(default="Unknown Player", description="Name of the player.")
 
-    def play(self, game: Game):
-        """ Executes the player's turn in the game."""
-        if self.done or self.busted:
-            return
-
-        logger.info(f"Player: {self.name} turn.")
-
-        if not self.in_draw_3 and self.decide_draw() == False:
-            self.done = True
-            return
-
-        drawn_card = game.draw_card()
-        logger.info(f"Card drawn: {drawn_card}")
-        logger.info(f"Hand: {self.hand.normal}")
-
-        if drawn_card in NORMAL_CARDS:
-            self.hand.normal.append(drawn_card)
-        elif drawn_card in BONUS_CARDS:
-            self.hand.bonus.append(drawn_card)
-        elif drawn_card in SPECIAL_CARDS:
-            self.hand.special_cards_log.append(drawn_card)
-
-            if drawn_card == "second_chance":
-                self.second_chance = True
-            if drawn_card == "freeze":
-                self.decide_freeze()
-            if drawn_card == "draw_3":
-                chosen_player_id: str = self.decide_draw_3(game)
-                game.apply_draw_3(chosen_player_id)
+    def receive_card(self, card: str):
+        if card in NORMAL_CARDS:
+            self.hand.normal.append(card)
+        elif card in BONUS_CARDS:
+            self.hand.bonus.append(card)
+        elif card in SPECIAL_CARDS:
+            self.hand.special_cards_log.append(card)
         else:
-            raise ValueError("Drawn card not valid:", drawn_card)
-
-        self.done = self.check_bust()
-
-    def check_bust(self):
-        # Check if list is same length after removing duplicates
-        if len(self.hand.normal) != len(set(self.hand.normal)):
-            if self.second_chance:
-                logger.info(f"Player {self.name} used second chance to avoid bust.")
-                self.hand.normal = list(set(self.hand.normal)) # Remove duplicate
-                self.second_chance = False
-            else:
-                self.busted = True
-                logger.info(f"Player {self.name} busted!")
-                self.done = True
+            raise ValueError("Drawn card not valid:", card)
 
     def decide_draw(self):
         return True # TODO
 
-    def decide_freeze(self):
-        pass
+    def decide_freeze(self) -> str:
+        """ Decide which opponent to freeze.
+        Returns the player id to freeze."""
+        # TODO: Make this smarter than random
+        chosen_player = game.rng.choice(list(game.players))
+        logger.info(f"Player {self.name} gave to freeze player {chosen_player.name}")
+        return chosen_player.id
 
     def decide_draw_3(self, game) -> str:
         """ Decide which opponent to give the draw 3 card to.
@@ -233,20 +228,25 @@ class Player(BaseModel):
         logger.info(f"Player {self.name} gave draw 3 to player {chosen_player.name}")
         return chosen_player.id
 
-    def count_score(self):
-        if self.busted:
-            return 0 
+    def check_bust(self: Player) -> bool:
+        if len(self.hand.normal) != len(set(self.hand.normal)): # Check if list is same length after removing duplicates
+            return True
+        return False
 
-        total = 0
-        for card in self.hand.normal:
-            total += int(card)
 
-        if "x2" in self.hand.bonus: # Punctuation before addition of bonuses
-            total *= 2
-            self.hand.bonus.remove("x2")
-        for card in self.hand.bonus:
-            total += int(card.replace("+", ""))
-        return total
+# Util function
+def count_score(player: Player) -> int:
+    if player.busted:
+        return 0
+
+    total = sum(int(c) for c in player.hand.normal)
+
+    multiply = 2 if "x2" in player.hand.bonus else 1
+    total *= multiply
+
+    total += sum(int(b.replace("+", "")) for b in player.hand.bonus if b != "x2")
+
+    return total
 
 
 
@@ -271,9 +271,15 @@ if __name__ == "__main__":
         deck_remaining = card_decks["full_deck"]
     )
 
+    count = 0
     while not game.finished:
         game.next()
         logger.info(f"len deck remaining: {len(game.deck_remaining)}.")
+
+        count += 1
+        if count > 7:
+            logger.info("Max turns reached, ending game to avoid infinite loop.")
+            break
 
     game.game_summary()
 
