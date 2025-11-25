@@ -4,6 +4,7 @@ from collections import deque # For next player rotations
 from pydantic import BaseModel, field_validator, Field, ConfigDict
 from typing import List
 from uuid import uuid4
+from enum import Enum
 
 logging.basicConfig(
     level=logging.INFO,
@@ -50,6 +51,10 @@ card_decks = {
     ],
 }
 
+NORMAL_CARDS = {str(i) for i in range(13)}  # "0"..."12"
+BONUS_CARDS = {"x2", "+2", "+4", "+6", "+8", "+10"}
+SPECIAL_CARDS = {"freeze", "second_chance", "draw_3"}
+
 class Game(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True) # Needed for random.Random type
 
@@ -63,6 +68,7 @@ class Game(BaseModel):
         """Create instance-specific random generator.
         Note: Pydantic automatically runs this after initialization."""
         self.rng = random.Random(self.seed)
+        self.rng.shuffle(self.deck_remaining)
 
     @field_validator("players", mode="before")
     @classmethod
@@ -76,13 +82,10 @@ class Game(BaseModel):
     @field_validator("deck_remaining", mode="before")
     @classmethod
     def check_deck_remaining(cls, v):
-        if len(v) > len(card_decks["full_deck"]):
-            raise ValueError("deck_remaining longer than full deck")
-        for card in v:
-            if not isinstance(card, str):
-                raise ValueError("Cards must be strings")
-            if card not in card_decks["full_deck"]:
-                raise ValueError("Card not valid in deck_remaining:", card)
+        from_card_list = NORMAL_CARDS | BONUS_CARDS | SPECIAL_CARDS
+        for c in v:
+            if c not in from_card_list:
+                raise ValueError(f"Invalid card in deck: {c}")
         return v
 
     def next(self):
@@ -95,14 +98,15 @@ class Game(BaseModel):
         next_player = self.next_player()
         next_player.play(game=self)
 
+        self.finished = self.check_finished()
+
     def next_player(self):
         next_player = self.players[0]
         self.players.rotate(-1)
         return next_player
 
     def draw_card(self):
-        card = self.rng.choice(self.deck_remaining)
-        self.deck_remaining.remove(card)
+        card = self.deck_remaining.pop()
         return card
 
     def apply_draw_3(self, to_player_id: str):
@@ -115,6 +119,15 @@ class Game(BaseModel):
                 player.in_draw_3 = False
                 return
         raise ValueError("Error: Player with id", to_player_id, "not found for draw 3 card.")
+
+    def check_finished(self):
+        all_done = all(player.done or player.busted for player in self.players)
+        if all_done:
+            return True
+        if len(self.deck_remaining) == 0:
+            logger.info("Deck is empty, finishing game.")
+            return True
+        return False
 
     def game_summary(self):
         logger.info(f"Player scores:")
@@ -131,21 +144,21 @@ class Hand(BaseModel):
     @field_validator("normal", mode="before")
     def check_normal(cls, v):
         for card in v:
-            if not card in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]:
+            if not card in NORMAL_CARDS:
                 raise ValueError("Normal Cards not valid")
         return v
 
     @field_validator("bonus", mode="before")
     def check_bonus(cls, v):
         for card in v:
-            if not card in ["x2", "+2", "+4", "+6", "+8", "+10"]:
+            if not card in BONUS_CARDS:
                 raise ValueError("Bonus Cards not valid")
         return v
 
     @field_validator("special_cards_log", mode="before")
     def check_special_cards_log(cls, v):
         for card in v:
-            if not card in ["freeze", "second_chance", "draw_3"]:
+            if not card in SPECIAL_CARDS:
                 raise ValueError("Special Cards not valid")
         return v
 
@@ -155,7 +168,7 @@ class Player(BaseModel):
     done: bool = Field(default=False, description="Boolean indicating if the player is done playing this round.")
     busted: bool = Field(default=False, description="Boolean indicating if the player has busted this round.")
     in_draw_3: bool = Field(default=False, description="Boolean indicating if the player is currently affected by a 'draw 3' card.")
-    hand: Hand = Field(default=Hand(), description="Player's hand containing normal and bonus cards.")
+    hand: Hand = Field(default_factory=Hand, description="Player's hand containing normal and bonus cards.")
     second_chance: bool = Field(default=False, description="Boolean indicating if the player has a second chance special card to use against busting.")
     name: str = Field(default="Unknown Player", description="Name of the player.")
 
@@ -174,11 +187,11 @@ class Player(BaseModel):
         logger.info(f"Card drawn: {drawn_card}")
         logger.info(f"Hand: {self.hand.normal}")
 
-        if drawn_card in ["0","1","2","3","4","5","6","7","8","9","10","11","12"]:
+        if drawn_card in NORMAL_CARDS:
             self.hand.normal.append(drawn_card)
-        elif drawn_card in ["x2", "+2", "+4", "+6", "+8", "+10"]:
+        elif drawn_card in BONUS_CARDS:
             self.hand.bonus.append(drawn_card)
-        elif drawn_card == "freeze" or drawn_card == "second_chance" or drawn_card == "draw_3":
+        elif drawn_card in SPECIAL_CARDS:
             self.hand.special_cards_log.append(drawn_card)
 
             if drawn_card == "second_chance":
@@ -258,14 +271,10 @@ if __name__ == "__main__":
         deck_remaining = card_decks["full_deck"]
     )
 
-    rounds_played = 0
     while not game.finished:
         game.next()
         logger.info(f"len deck remaining: {len(game.deck_remaining)}.")
 
-        rounds_played += 1
-        if rounds_played > 5:
-            game.finished = True
     game.game_summary()
 
 
