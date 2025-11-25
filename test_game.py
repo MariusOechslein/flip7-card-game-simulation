@@ -101,7 +101,7 @@ def test_game_state_setups():
 
 def test_pydantic_models():
     players_state = [flip7.Player(), flip7.Player()]
-    faulty_deck = flip7.card_decks["normal_cards_only"]
+    faulty_deck = copy.deepcopy(flip7.card_decks["normal_cards_only"])
     faulty_deck.append("ExtraCard")  # Invalid card to test pydantic validation
     try:
         game = flip7.Game(players=deque(players_state), deck_remaining=faulty_deck)
@@ -109,6 +109,26 @@ def test_pydantic_models():
     except:
         print("Pydantic model validation --- Passed")
 
+def test_draw_3_card():
+    players_state = [flip7.Player(name="Marius"), flip7.Player(name="Thea")]
+    game = flip7.Game(players=deque(players_state), deck_remaining=flip7.card_decks["full_deck"], seed=42)
+    game.apply_draw_3(to_player_id=game.players[0].id)
+    if game.players[0].hand.normal == ["5", "2"] and game.players[0].hand.bonus == ["+4"]:
+        print("Draw 3 card application --- Passed")
+    else:
+        print("Draw 3 card application --- Error")
+
+def test_random_seed():
+    players_state = [flip7.Player(name="Marius"), flip7.Player(name="Thea")]
+    game1 = flip7.Game(players=deque(players_state), deck_remaining=flip7.card_decks["full_deck"], seed=42)
+    game2 = flip7.Game(players=deque(players_state), deck_remaining=flip7.card_decks["full_deck"], seed=42)
+
+    draws_game1 = [game1.draw_card() for _ in range(5)]
+    draws_game2 = [game2.draw_card() for _ in range(5)]
+    if draws_game1 == draws_game2:
+        print("Random seed consistency --- Passed")
+    else:
+        print("Random seed consistency --- Error")
 
 
 
@@ -118,6 +138,8 @@ test_next_player_queue_setup()
 test_valid_game_state_setups()
 test_game_state_setups()
 test_pydantic_models()
+test_draw_3_card()
+test_random_seed()
 
 
 print()
