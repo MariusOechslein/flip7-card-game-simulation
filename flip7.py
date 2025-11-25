@@ -1,10 +1,17 @@
-"""TODO: Use Pydantic! TODO: Use Logging library! TODO: Use Debugger for errors!"""
-
 import random
+import logging
 from collections import deque # For next player rotations
 from pydantic import BaseModel, field_validator, Field, ConfigDict
 from typing import List
 from uuid import uuid4
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename='game.log',
+    filemode='w'
+)
+logger = logging.getLogger(__name__)
 
 card_decks = {
     "normal_cards_only": [
@@ -80,9 +87,9 @@ class Game(BaseModel):
 
     def next(self):
         if self.finished:
-            print("Game is over.")
+            logger.info(f"Game is over.")
             for i, player in enumerate(self.players):
-                print("Player", str(i), "score:", player.count_score())
+                logger.info(f"Player {str(i)} score: {player.count_score()}")
             return
 
         next_player = self.next_player()
@@ -110,9 +117,9 @@ class Game(BaseModel):
         raise ValueError("Error: Player with id", to_player_id, "not found for draw 3 card.")
 
     def game_summary(self):
-        print("Player scores:")
+        logger.info(f"Player scores:")
         for i, player in enumerate(self.players):
-            print("Player", str(i), "score:", player.count_score(), "hand:", player.hand.normal, "bonus:", player.hand.bonus, "special_cards_log:", player.hand.special_cards_log, "busted:", player.busted)
+            logger.info(f"Player {str(i)} score: {player.count_score()} hand: {player.hand.normal} bonus: {player.hand.bonus} special_cards_log: {player.hand.special_cards_log} busted: {player.busted}")
 
 
 
@@ -157,16 +164,15 @@ class Player(BaseModel):
         if self.done or self.busted:
             return
 
-        # TODO: Implement logging strategy instead of print statements
-        print("Player:", self.name, "turn.")
+        logger.info(f"Player: {self.name} turn.")
 
         if not self.in_draw_3 and self.decide_draw() == False:
             self.done = True
             return
 
         drawn_card = game.draw_card()
-        print("Card drawn:", drawn_card)
-        print("Hand:", self.hand.normal)
+        logger.info(f"Card drawn: {drawn_card}")
+        logger.info(f"Hand: {self.hand.normal}")
 
         if drawn_card in ["0","1","2","3","4","5","6","7","8","9","10","11","12"]:
             self.hand.normal.append(drawn_card)
@@ -191,12 +197,12 @@ class Player(BaseModel):
         # Check if list is same length after removing duplicates
         if len(self.hand.normal) != len(set(self.hand.normal)):
             if self.second_chance:
-                print("Player", self.name, "used second chance to avoid bust.")
+                logger.info(f"Player {self.name} used second chance to avoid bust.")
                 self.hand.normal = list(set(self.hand.normal)) # Remove duplicate
                 self.second_chance = False
             else:
                 self.busted = True
-                print("Player", self.name, "busted!")
+                logger.info(f"Player {self.name} busted!")
                 self.done = True
 
     def decide_draw(self):
@@ -211,7 +217,7 @@ class Player(BaseModel):
 
         TODO: Make this decision smarter than random."""
         chosen_player = game.rng.choice(list(game.players))
-        print("Player", self.name, "gave draw 3 to player", chosen_player.name)
+        logger.info(f"Player {self.name} gave draw 3 to player {chosen_player.name}")
         return chosen_player.id
 
     def count_score(self):
@@ -255,8 +261,7 @@ if __name__ == "__main__":
     rounds_played = 0
     while not game.finished:
         game.next()
-        print("len deck remaining:", len(game.deck_remaining))
-        print()
+        logger.info(f"len deck remaining: {len(game.deck_remaining)}.")
 
         rounds_played += 1
         if rounds_played > 5:

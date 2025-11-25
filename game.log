@@ -1,0 +1,27 @@
+2025-11-25 12:20:11,093 - __main__ - INFO - Player: Marius turn.
+2025-11-25 12:20:11,093 - __main__ - INFO - Card drawn: 12
+2025-11-25 12:20:11,093 - __main__ - INFO - Hand: []
+2025-11-25 12:20:11,093 - __main__ - INFO - len deck remaining: 93.
+2025-11-25 12:20:11,093 - __main__ - INFO - Player: Thea turn.
+2025-11-25 12:20:11,093 - __main__ - INFO - Card drawn: 8
+2025-11-25 12:20:11,093 - __main__ - INFO - Hand: []
+2025-11-25 12:20:11,093 - __main__ - INFO - len deck remaining: 92.
+2025-11-25 12:20:11,093 - __main__ - INFO - Player: Marius turn.
+2025-11-25 12:20:11,093 - __main__ - INFO - Card drawn: 7
+2025-11-25 12:20:11,093 - __main__ - INFO - Hand: ['12']
+2025-11-25 12:20:11,093 - __main__ - INFO - len deck remaining: 91.
+2025-11-25 12:20:11,093 - __main__ - INFO - Player: Thea turn.
+2025-11-25 12:20:11,093 - __main__ - INFO - Card drawn: 6
+2025-11-25 12:20:11,093 - __main__ - INFO - Hand: ['8']
+2025-11-25 12:20:11,093 - __main__ - INFO - len deck remaining: 90.
+2025-11-25 12:20:11,093 - __main__ - INFO - Player: Marius turn.
+2025-11-25 12:20:11,093 - __main__ - INFO - Card drawn: freeze
+2025-11-25 12:20:11,093 - __main__ - INFO - Hand: ['12', '7']
+2025-11-25 12:20:11,093 - __main__ - INFO - len deck remaining: 89.
+2025-11-25 12:20:11,093 - __main__ - INFO - Player: Thea turn.
+2025-11-25 12:20:11,093 - __main__ - INFO - Card drawn: 3
+2025-11-25 12:20:11,093 - __main__ - INFO - Hand: ['8', '6']
+2025-11-25 12:20:11,093 - __main__ - INFO - len deck remaining: 88.
+2025-11-25 12:20:11,093 - __main__ - INFO - Player scores:
+2025-11-25 12:20:11,094 - __main__ - INFO - Player 0 score: 19 hand: ['12', '7'] bonus: [] special_cards_log: ['freeze'] busted: False
+2025-11-25 12:20:11,094 - __main__ - INFO - Player 1 score: 17 hand: ['8', '6', '3'] bonus: [] special_cards_log: [] busted: False

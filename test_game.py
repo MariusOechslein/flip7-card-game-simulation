@@ -1,7 +1,4 @@
-"""TODO: Use pytest!"""
-
 import flip7
-import copy
 from collections import deque
 import pytest
 
