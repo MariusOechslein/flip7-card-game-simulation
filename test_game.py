@@ -98,8 +98,16 @@ def test_game_state_setups():
     except:
         print("Faulty game state setup --- Passed")
     
-        
 
+def test_pydantic_models():
+    players_state = [flip7.Player(), flip7.Player()]
+    faulty_deck = flip7.card_decks["normal_cards_only"]
+    faulty_deck.append("ExtraCard")  # Invalid card to test pydantic validation
+    try:
+        game = flip7.Game(players=deque(players_state), deck_remaining=faulty_deck)
+        print("Pydantic model validation --- Error: Should have failed but didn't")
+    except:
+        print("Pydantic model validation --- Passed")
 
 
 
@@ -109,6 +117,7 @@ test_draw_card()
 test_next_player_queue_setup()
 test_valid_game_state_setups()
 test_game_state_setups()
+test_pydantic_models()
 
 
 print()

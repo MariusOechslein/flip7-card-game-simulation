@@ -2,8 +2,7 @@
 
 import random
 from collections import deque # For next player rotations
-import copy
-from pydantic import BaseModel, field_validator, model_validator, Field
+from pydantic import BaseModel, field_validator, Field
 from typing import List
 
 card_decks = {
@@ -55,6 +54,18 @@ class Game(BaseModel):
             raise ValueError("players must be a deque")
         if len(v) < 1:
             raise ValueError("must have at least 1 player")
+        return v
+
+    @field_validator("deck_remaining", mode="before")
+    @classmethod
+    def check_players(cls, v):
+        if len(v) > len(card_decks["full_deck"]):
+            raise ValueError("deck_remaining longer than full deck")
+        for card in v:
+            if not isinstance(card, str):
+                raise ValueError("Cards must be strings")
+            if card not in card_decks["full_deck"]:
+                raise ValueError("Card not valid in deck_remaining:", card)
         return v
 
     def next(self):
