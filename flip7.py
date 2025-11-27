@@ -69,7 +69,7 @@ class DrawingStrategy(str, Enum):
     BELOW_3_CARDS = "below_3_cards"
 
 
-class Game(BaseModel):
+class GameRound(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True) # Needed for random.Random type
 
     finished: bool = Field(default=False, description="Boolean indicating if the game is finished.")
@@ -168,15 +168,15 @@ class Game(BaseModel):
         card = self.deck_remaining.pop()
         return card
 
-    def apply_freeze_effect(self, target: Player):
+    def apply_freeze_effect(self, target: PlayerBase):
         target.done = True
         logger.info(f"Player {target.name} has been frozen and cannot draw more cards this round.")
 
-    def apply_draw_3_effect(self, player: Player):
+    def apply_draw_3_effect(self, player: PlayerBase):
         for i in range(3):
             self._execute_player_draw(player)
     
-    def choose_player_by_targeting_strategy(self, chooser: Player, targeting_strategy: TargetingStrategy) -> Player:
+    def choose_player_by_targeting_strategy(self, chooser: Player, targeting_strategy: TargetingStrategy) -> PlayerBase:
         valid_players = [p for p in self.players if not p.done and not p.busted]
         if not valid_players:
             return None
@@ -249,15 +249,15 @@ class PlayerBase(BaseModel, ABC): # Abstract Base Class for Player
     hand: Hand = Field(default_factory=Hand, description="Player's hand containing normal and bonus cards.")
 
     @abstractmethod
-    def decide_draw(self, game: Game) -> bool:
+    def decide_draw(self, game: GameRound) -> bool:
         pass
 
     @abstractmethod
-    def decide_freeze_strategy(self, game: Game) -> TargetingStrategy:
+    def decide_freeze_strategy(self, game: GameRound) -> TargetingStrategy:
         pass
 
     @abstractmethod
-    def decide_draw_3_strategy(self, game: Game) -> TargetingStrategy:
+    def decide_draw_3_strategy(self, game: GameRound) -> TargetingStrategy:
         pass
 
     def receive_card(self, card: str):
@@ -279,7 +279,7 @@ class AutomaticPlayer(PlayerBase):
     targeting_strategy: TargetingStrategy = Field(default=TargetingStrategy.RANDOM, description="Player's targeting strategy for special cards.")
     drawing_strategy: DrawingStrategy = Field(default=DrawingStrategy.BELOW_25_VALUE, description="Player's drawing strategy for deciding whether to draw more cards.")
 
-    def decide_draw(self, game: Game) -> bool:
+    def decide_draw(self, game: GameRound) -> bool:
         """ Decide whether to draw a card or stop.
         Returns True to draw, False to stop."""
         if self.drawing_strategy == DrawingStrategy.ALWAYS:
@@ -294,7 +294,7 @@ class AutomaticPlayer(PlayerBase):
         else:
             raise ValueError("Invalid drawing strategy:", self.drawing_strategy)
 
-    def decide_freeze_strategy(self, game: Game) -> TargetingStrategy:
+    def decide_freeze_strategy(self, game: GameRound) -> TargetingStrategy:
         """ Decide which opponent to freeze.
         Returns the player id to freeze."""
         return self.targeting_strategy
@@ -305,11 +305,11 @@ class AutomaticPlayer(PlayerBase):
         return self.targeting_strategy
 
 class InteractivePlayer(PlayerBase):
-    def decide_draw(self, game: Game) -> bool:
+    def decide_draw(self, game: GameRound) -> bool:
         choice: str = self.choice_interface("do you want to draw a card?", ['y', 'n'])
         return choice == 'y'
 
-    def decide_freeze_strategy(self, game: Game) -> TargetingStrategy:
+    def decide_freeze_strategy(self, game: GameRound) -> TargetingStrategy:
         choice: TargetingStrategy = self.choice_interface("Choose targeting strategy for freeze", TargetingStrategy._value2member_map_.keys())
         return TargetingStrategy(choice)
 
@@ -347,23 +347,23 @@ if __name__ == "__main__":
     players_state = [
         AutomaticPlayer(name = "Marius"),
         AutomaticPlayer(name = "Thea"),
-        InteractivePlayer(name = "You"),
+        #InteractivePlayer(name = "You"),
     ]
-    game = Game(
+    game_round = GameRound(
         players = deque(players_state),
         deck_remaining = card_decks["full_deck"]
     )
 
     count = 0
-    while not game.finished:
-        game.next()
-        logger.info(f"len deck remaining: {len(game.deck_remaining)}.")
+    while not game_round.finished:
+        game_round.next()
+        logger.info(f"len deck remaining: {len(game_round.deck_remaining)}.")
 
         count += 1
         if count > 50:
             logger.info("Max turns reached, ending game to avoid infinite loop.")
             break
 
-    game.game_summary()
+    game_round.game_summary()
 
 
