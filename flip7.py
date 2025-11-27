@@ -55,6 +55,19 @@ NORMAL_CARDS = {str(i) for i in range(13)}  # "0"..."12"
 BONUS_CARDS = {"x2", "+2", "+4", "+6", "+8", "+10"}
 SPECIAL_CARDS = {"freeze", "second_chance", "draw_3"}
 
+class TargetingStrategy(str, Enum):
+    RANDOM = "random"
+    RANDOM_OPPONENT = "random_opponent"
+    LOWEST_SCORE = "lowest_score"
+    HIGHEST_SCORE = "highest_score"
+
+class DrawingStrategy(str, Enum):
+    ALWAYS = "always"
+    NEVER = "never"
+    BELOW_25_VALUE = "below_25_value"
+    BELOW_3_CARDS = "below_3_cards"
+
+
 class Game(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True) # Needed for random.Random type
 
@@ -103,6 +116,12 @@ class Game(BaseModel):
             return
         logger.info(f"Player: {player.name} turn.")
 
+        wants_to_draw: bool = player.decide_draw(self)
+        if not wants_to_draw:
+            player.done = True
+            logger.info(f"Player {player.name} decided to stop drawing cards.")
+            return
+
         drawn_card = self.draw_card()
         logger.info(f"Card drawn: {drawn_card}")
 
@@ -144,6 +163,23 @@ class Game(BaseModel):
 
     def apply_freeze(self, to_player_id: str):
         pass # TODO
+    
+    def apply_choose_player(self, chooser: Player, targeting_strategy: TargetingStrategy) -> Player:
+        valid_players = [p for p in self.players if not p.done and not p.busted]
+        if not valid_players:
+            return None
+
+        if targeting_strategy == TargetingStrategy.RANDOM:
+            return self.rng.choice(valid_players)
+        elif targeting_strategy == TargetingStrategy.RANDOM_OPPONENT:
+            valid_opponents = [p for p in valid_players if p.id != chooser.id]
+            return self.rng.choice(valid_opponents)
+        elif targeting_strategy == TargetingStrategy.LOWEST_SCORE:
+            return min(valid_players, key=lambda p: count_score(p))
+        elif targeting_strategy == TargetingStrategy.HIGHEST_SCORE:
+            return max(valid_players, key=lambda p: count_score(p))
+        else:
+            raise ValueError("Invalid choose player option:", targeting_strategy)
 
     def check_game_finished(self):
         all_done = all(player.done or player.busted for player in self.players)
@@ -163,9 +199,9 @@ class Game(BaseModel):
 
 
 class Hand(BaseModel):
-    normal: List[str] = Field(default=[], description="List of normal cards in hand.")
-    bonus: List[str] = Field(default=[], description="List of bonus cards in hand.")
-    special_cards_log: List[str] = Field(default=[], description="List of special cards in hand.")
+    normal: List[str] = Field(default=list(), description="List of normal cards in hand.")
+    bonus: List[str] = Field(default=list(), description="List of bonus cards in hand.")
+    special_cards_log: List[str] = Field(default=list(), description="List of special cards in hand.")
 
     @field_validator("normal", mode="before")
     def check_normal(cls, v):
@@ -183,6 +219,8 @@ class Hand(BaseModel):
 
     @field_validator("special_cards_log", mode="before")
     def check_special_cards_log(cls, v):
+        if not isinstance(v, list):
+            raise ValueError("special_cards_log must be a list")
         for card in v:
             if not card in SPECIAL_CARDS:
                 raise ValueError("Special Cards not valid")
@@ -198,6 +236,9 @@ class Player(BaseModel):
     second_chance: bool = Field(default=False, description="Boolean indicating if the player has a second chance special card to use against busting.")
     name: str = Field(default="Unknown Player", description="Name of the player.")
 
+    targeting_strategy: TargetingStrategy = Field(default=TargetingStrategy.RANDOM, description="Player's targeting strategy for special cards.")
+    drawing_strategy: DrawingStrategy = Field(default=DrawingStrategy.BELOW_25_VALUE, description="Player's drawing strategy for deciding whether to draw more cards.")
+
     def receive_card(self, card: str):
         if card in NORMAL_CARDS:
             self.hand.normal.append(card)
@@ -208,25 +249,30 @@ class Player(BaseModel):
         else:
             raise ValueError("Drawn card not valid:", card)
 
-    def decide_draw(self):
-        return True # TODO
+    def decide_draw(self, game: Game) -> bool:
+        """ Decide whether to draw a card or stop.
+        Returns True to draw, False to stop."""
+        if self.drawing_strategy == DrawingStrategy.ALWAYS:
+            return True
+        elif self.drawing_strategy == DrawingStrategy.NEVER:
+            return False
+        elif self.drawing_strategy == DrawingStrategy.BELOW_25_VALUE:
+            current_score = count_score(self)
+            return current_score < 25
+        elif self.drawing_strategy == DrawingStrategy.BELOW_3_CARDS:
+            return len(self.hand.normal) < 3
+        else:
+            raise ValueError("Invalid drawing strategy:", self.drawing_strategy)
 
-    def decide_freeze(self) -> str:
+    def decide_freeze(self, game: Game) -> TargetingStrategy:
         """ Decide which opponent to freeze.
         Returns the player id to freeze."""
-        # TODO: Make this smarter than random
-        chosen_player = game.rng.choice(list(game.players))
-        logger.info(f"Player {self.name} gave to freeze player {chosen_player.name}")
-        return chosen_player.id
+        return self.targeting_strategy
 
-    def decide_draw_3(self, game) -> str:
+    def decide_draw_3(self, game) -> TargetingStrategy:
         """ Decide which opponent to give the draw 3 card to.
-        Returns the player id to give draw_3 to.
-
-        TODO: Make this decision smarter than random."""
-        chosen_player = game.rng.choice(list(game.players))
-        logger.info(f"Player {self.name} gave draw 3 to player {chosen_player.name}")
-        return chosen_player.id
+        Returns the player id to give draw_3 to."""
+        return self.targeting_strategy
 
     def check_bust(self: Player) -> bool:
         if len(self.hand.normal) != len(set(self.hand.normal)): # Check if list is same length after removing duplicates
