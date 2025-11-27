@@ -5,7 +5,7 @@ import pytest
 
 def test_normal_card_deck():
     single_player = [
-        flip7.Player()
+        flip7.AutomaticPlayer()
     ]
     game = flip7.Game(players=deque(single_player), deck_remaining=flip7.card_decks["normal_cards_only"])
     expected_list = [
@@ -26,14 +26,14 @@ def test_normal_card_deck():
     assert sorted(game.deck_remaining) == sorted(expected_list)
 
 def test_draw_card():
-    players = [flip7.Player()]
+    players = [flip7.AutomaticPlayer()]
     game = flip7.Game(players=deque(players), deck_remaining=flip7.card_decks["normal_cards_only"])
     num_cards_before = len(game.deck_remaining)
     card = game.draw_card()
     assert len(game.deck_remaining) == num_cards_before - 1
 
 def test_next_player_queue_setup():
-    players = [flip7.Player(name="Marius"), flip7.Player(name="Thea")]
+    players = [flip7.AutomaticPlayer(name="Marius"), flip7.AutomaticPlayer(name="Thea")]
     game = flip7.Game(players=deque(players), deck_remaining=flip7.card_decks["normal_cards_only"])
     first_player = game.get_next_player()
     second_player = game.get_next_player()
@@ -42,14 +42,14 @@ def test_next_player_queue_setup():
 
 def test_valid_game_state_setups():
     players_state = [
-        flip7.Player(hand={
+        flip7.AutomaticPlayer(hand={
             "normal": [],
             "bonus": []
         },
         name = "Marius"
         ),
 
-        flip7.Player(hand={
+        flip7.AutomaticPlayer(hand={
             "normal": [],
             "bonus": []
         },
@@ -61,10 +61,10 @@ def test_valid_game_state_setups():
 
 def test_invalid_player_card():
     with pytest.raises(ValueError, match="Normal Cards not valid"):
-        player = flip7.Player(hand={"normal": ["InvalidCard"], "bonus": []})
+        player = flip7.AutomaticPlayer(hand={"normal": ["InvalidCard"], "bonus": []})
 
 def test_random_seed():
-    players_state = [flip7.Player(name="Marius"), flip7.Player(name="Thea")]
+    players_state = [flip7.AutomaticPlayer(name="Marius"), flip7.AutomaticPlayer(name="Thea")]
     game1 = flip7.Game(players=deque(players_state), deck_remaining=flip7.card_decks["full_deck"], seed=42)
     game2 = flip7.Game(players=deque(players_state), deck_remaining=flip7.card_decks["full_deck"], seed=42)
 
@@ -76,4 +76,10 @@ def test_apply_draw3():
     pass
 
 def test_apply_freeze():
+    pass
+
+def test_number_of_player():
+    pass
+
+def test_player_strategies():
     pass

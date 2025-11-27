@@ -5,6 +5,7 @@ from pydantic import BaseModel, field_validator, Field, ConfigDict
 from typing import List
 from uuid import uuid4
 from enum import Enum
+from abc import ABC, abstractmethod
 
 logging.basicConfig(
     level=logging.INFO,
@@ -238,17 +239,26 @@ class Hand(BaseModel):
         return v
 
 
-class Player(BaseModel):
+class PlayerBase(BaseModel, ABC): # Abstract Base Class for Player
     id: str = Field(default_factory=lambda: str(uuid4()), description="Unique identifier for the player.")
     done: bool = Field(default=False, description="Boolean indicating if the player is done playing this round.")
     busted: bool = Field(default=False, description="Boolean indicating if the player has busted this round.")
-    in_draw_3: bool = Field(default=False, description="Boolean indicating if the player is currently affected by a 'draw 3' card.")
-    hand: Hand = Field(default_factory=Hand, description="Player's hand containing normal and bonus cards.")
     second_chance: bool = Field(default=False, description="Boolean indicating if the player has a second chance special card to use against busting.")
     name: str = Field(default="Unknown Player", description="Name of the player.")
 
-    targeting_strategy: TargetingStrategy = Field(default=TargetingStrategy.RANDOM, description="Player's targeting strategy for special cards.")
-    drawing_strategy: DrawingStrategy = Field(default=DrawingStrategy.BELOW_25_VALUE, description="Player's drawing strategy for deciding whether to draw more cards.")
+    hand: Hand = Field(default_factory=Hand, description="Player's hand containing normal and bonus cards.")
+
+    @abstractmethod
+    def decide_draw(self, game: Game) -> bool:
+        pass
+
+    @abstractmethod
+    def decide_freeze_strategy(self, game: Game) -> TargetingStrategy:
+        pass
+
+    @abstractmethod
+    def decide_draw_3_strategy(self, game: Game) -> TargetingStrategy:
+        pass
 
     def receive_card(self, card: str):
         if card in NORMAL_CARDS:
@@ -259,6 +269,15 @@ class Player(BaseModel):
             self.hand.special_cards_log.append(card)
         else:
             raise ValueError("Drawn card not valid:", card)
+
+    def check_bust(self) -> bool:
+        if len(self.hand.normal) != len(set(self.hand.normal)): # Check if list is same length after removing duplicates
+            return True
+        return False
+
+class AutomaticPlayer(PlayerBase):
+    targeting_strategy: TargetingStrategy = Field(default=TargetingStrategy.RANDOM, description="Player's targeting strategy for special cards.")
+    drawing_strategy: DrawingStrategy = Field(default=DrawingStrategy.BELOW_25_VALUE, description="Player's drawing strategy for deciding whether to draw more cards.")
 
     def decide_draw(self, game: Game) -> bool:
         """ Decide whether to draw a card or stop.
@@ -285,14 +304,9 @@ class Player(BaseModel):
         Returns the player id to give draw_3 to."""
         return self.targeting_strategy
 
-    def check_bust(self: Player) -> bool:
-        if len(self.hand.normal) != len(set(self.hand.normal)): # Check if list is same length after removing duplicates
-            return True
-        return False
-
 
 # Util function
-def count_score(player: Player) -> int:
+def count_score(player: PlayerBase) -> int:
     if player.busted:
         return 0
 
@@ -309,19 +323,8 @@ def count_score(player: Player) -> int:
 
 if __name__ == "__main__":
     players_state = [
-        Player(hand={
-            "normal": [],
-            "bonus": []
-        },
-        name = "Marius"
-        ),
-
-        Player(hand={
-            "normal": [],
-            "bonus": []
-        },
-        name = "Thea"
-        )
+        AutomaticPlayer(name = "Marius"),
+        AutomaticPlayer(name = "Thea")
     ]
     game = Game(
         players = deque(players_state),
