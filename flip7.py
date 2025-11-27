@@ -304,6 +304,28 @@ class AutomaticPlayer(PlayerBase):
         Returns the player id to give draw_3 to."""
         return self.targeting_strategy
 
+class InteractivePlayer(PlayerBase):
+    def decide_draw(self, game: Game) -> bool:
+        choice: str = self.choice_interface("do you want to draw a card?", ['y', 'n'])
+        return choice == 'y'
+
+    def decide_freeze_strategy(self, game: Game) -> TargetingStrategy:
+        choice: TargetingStrategy = self.choice_interface("Choose targeting strategy for freeze", TargetingStrategy._value2member_map_.keys())
+        return TargetingStrategy(choice)
+
+    def decide_draw_3_strategy(self, game) -> TargetingStrategy:
+        choice: TargetingStrategy = self.choice_interface("Choose targeting strategy for draw 3", TargetingStrategy._value2member_map_.keys())
+        return TargetingStrategy(choice)
+
+    def choice_interface(self, prompt: str, options: List[str]) -> str:
+        print(f"\n{self.name}'s turn. Current hand: Normal Cards: {self.hand.normal}, Bonus Cards: {self.hand.bonus}, Special Cards: {self.hand.special_cards_log}\n")
+        while True:
+            choice = input(f"{self.name}, {prompt} ({', '.join(options)}): ").strip().lower()
+            if choice in options:
+                return choice
+            else:
+                print(f"Invalid input. Please enter one of the following options: {', '.join(options)}.")
+
 
 # Util function
 def count_score(player: PlayerBase) -> int:
@@ -324,7 +346,8 @@ def count_score(player: PlayerBase) -> int:
 if __name__ == "__main__":
     players_state = [
         AutomaticPlayer(name = "Marius"),
-        AutomaticPlayer(name = "Thea")
+        AutomaticPlayer(name = "Thea"),
+        InteractivePlayer(name = "You"),
     ]
     game = Game(
         players = deque(players_state),
@@ -337,7 +360,7 @@ if __name__ == "__main__":
         logger.info(f"len deck remaining: {len(game.deck_remaining)}.")
 
         count += 1
-        if count > 7:
+        if count > 50:
             logger.info("Max turns reached, ending game to avoid infinite loop.")
             break
 
