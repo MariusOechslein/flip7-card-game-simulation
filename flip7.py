@@ -122,12 +122,15 @@ class Game(BaseModel):
             logger.info(f"Player {player.name} decided to stop drawing cards.")
             return
 
+        self._execute_player_draw(player)
+
+    def _execute_player_draw(self, player):
         drawn_card = self.draw_card()
         logger.info(f"Card drawn: {drawn_card}")
 
         player.receive_card(drawn_card)
         busted: bool = player.check_bust()
-        if busted:
+        if busted: # Refactor to function
             if player.second_chance:
                 player.second_chance = False
                 player.hand.normal.pop() # Assumes last cards are appended at the end.
@@ -139,11 +142,17 @@ class Game(BaseModel):
 
         if drawn_card in SPECIAL_CARDS:
             if drawn_card == "freeze":
-                player_id_to_freeze: str = player.decide_freeze()
-                self.apply_freeze(player_id_to_freeze)
+                targeting_strategy: TargetingStrategy = player.decide_freeze_strategy(self)
+                target: Player = self.choose_player_by_targeting_strategy(player, targeting_strategy)
+                logger.info(f"Player {player.name} chose to freeze Player {target.name}.")
+                self.apply_freeze_effect(target)
+
             if drawn_card == "draw_3":
-                player_id_to_draw3: str = player.decide_draw_3(self)
-                self.apply_draw_3(player_id_to_draw3)
+                targeting_strategy: TargetingStrategy = player.decide_draw_3_strategy(self)
+                target: Player = self.choose_player_by_targeting_strategy(player, targeting_strategy)
+                logger.info(f"Player {player.name} chose to give draw 3 to Player {target.name}.")
+                self.apply_draw_3_effect(target)
+
             if drawn_card == "second_chance":
                 player.second_chance = True # Always applied to player who draws it
                 logger.info(f"Player {player.name} received second chance special card.")
@@ -158,13 +167,15 @@ class Game(BaseModel):
         card = self.deck_remaining.pop()
         return card
 
-    def apply_draw_3(self, to_player_id: str):
-        pass
+    def apply_freeze_effect(self, target: Player):
+        target.done = True
+        logger.info(f"Player {target.name} has been frozen and cannot draw more cards this round.")
 
-    def apply_freeze(self, to_player_id: str):
-        pass # TODO
+    def apply_draw_3_effect(self, player: Player):
+        for i in range(3):
+            self._execute_player_draw(player)
     
-    def apply_choose_player(self, chooser: Player, targeting_strategy: TargetingStrategy) -> Player:
+    def choose_player_by_targeting_strategy(self, chooser: Player, targeting_strategy: TargetingStrategy) -> Player:
         valid_players = [p for p in self.players if not p.done and not p.busted]
         if not valid_players:
             return None
@@ -194,7 +205,7 @@ class Game(BaseModel):
     def game_summary(self):
         logger.info(f"Player scores:")
         for i, player in enumerate(self.players):
-            logger.info(f"Player {str(i)} score: {count_score(player)} hand: {player.hand.normal} bonus: {player.hand.bonus} special_cards_log: {player.hand.special_cards_log} busted: {player.busted}")
+            logger.info(f"Player {str(player.name)} score: {count_score(player)} hand: {player.hand.normal} bonus: {player.hand.bonus} special_cards_log: {player.hand.special_cards_log} busted: {player.busted}")
 
 
 
@@ -264,12 +275,12 @@ class Player(BaseModel):
         else:
             raise ValueError("Invalid drawing strategy:", self.drawing_strategy)
 
-    def decide_freeze(self, game: Game) -> TargetingStrategy:
+    def decide_freeze_strategy(self, game: Game) -> TargetingStrategy:
         """ Decide which opponent to freeze.
         Returns the player id to freeze."""
         return self.targeting_strategy
 
-    def decide_draw_3(self, game) -> TargetingStrategy:
+    def decide_draw_3_strategy(self, game) -> TargetingStrategy:
         """ Decide which opponent to give the draw 3 card to.
         Returns the player id to give draw_3 to."""
         return self.targeting_strategy
