@@ -79,7 +79,7 @@ class Game(BaseModel):
         while not self.finished:
             game_round = GameRound(
                 players = deque(self.get_players_for_new_round()),
-                deck_remaining = card_decks["full_deck"]
+                deck_remaining = card_decks["full_deck"].copy()
             )
             while not game_round.finished:
                 game_round.next()
@@ -179,7 +179,7 @@ class GameRound(BaseModel):
         if busted: # Refactor to function
             if player.second_chance:
                 player.second_chance = False
-                player.hand.normal.pop() # Assumes last cards are appended at the end.
+                player.hand.normal.remove(drawn_card)
                 logger.info(f"Player {player.name} busted but used second chance.")
             else:
                 player.busted = True
@@ -210,7 +210,7 @@ class GameRound(BaseModel):
         return next_player
 
     def draw_card(self):
-        card = self.deck_remaining.pop()
+        card = self.deck_remaining.pop(0)
         return card
 
     def apply_freeze_effect(self, target: PlayerBase):
@@ -256,9 +256,9 @@ class GameRound(BaseModel):
 
 
 class Hand(BaseModel):
-    normal: List[str] = Field(default=list(), description="List of normal cards in hand.")
-    bonus: List[str] = Field(default=list(), description="List of bonus cards in hand.")
-    special_cards_log: List[str] = Field(default=list(), description="List of special cards in hand.")
+    normal: List[str] = Field(default_factory=list, description="List of normal cards in hand.")
+    bonus: List[str] = Field(default_factory=list, description="List of bonus cards in hand.")
+    special_cards_log: List[str] = Field(default_factory=list, description="List of special cards in hand.")
 
     @field_validator("normal", mode="before")
     def check_normal(cls, v):

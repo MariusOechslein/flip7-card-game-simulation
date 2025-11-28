@@ -1,251 +1,325 @@
-2025-11-28 21:38:43,160 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,160 - __main__ - INFO - Card drawn: 12
-2025-11-28 21:38:43,160 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,160 - __main__ - INFO - Card drawn: second_chance
-2025-11-28 21:38:43,160 - __main__ - INFO - Player Marius received second chance special card.
-2025-11-28 21:38:43,160 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,160 - __main__ - INFO - Card drawn: second_chance
-2025-11-28 21:38:43,160 - __main__ - INFO - Player Thea received second chance special card.
-2025-11-28 21:38:43,160 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,160 - __main__ - INFO - Card drawn: +4
-2025-11-28 21:38:43,160 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,161 - __main__ - INFO - Card drawn: freeze
-2025-11-28 21:38:43,161 - __main__ - INFO - Player Thea chose to freeze Player Thea.
-2025-11-28 21:38:43,161 - __main__ - INFO - Player Thea has been frozen and cannot draw more cards this round.
-2025-11-28 21:38:43,161 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,161 - __main__ - INFO - Card drawn: freeze
-2025-11-28 21:38:43,161 - __main__ - INFO - Player Marius chose to freeze Player Marius.
-2025-11-28 21:38:43,161 - __main__ - INFO - Player Marius has been frozen and cannot draw more cards this round.
-2025-11-28 21:38:43,161 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,162 - __main__ - INFO - Player Thea score: 12 hand: ['12'] bonus: [] special_cards_log: ['second_chance', 'freeze'] busted: False
-2025-11-28 21:38:43,162 - __main__ - INFO - Player Marius score: 4 hand: [] bonus: ['+4'] special_cards_log: ['second_chance', 'freeze'] busted: False
-2025-11-28 21:38:43,162 - __main__ - INFO - Player Thea scored 12 this round. Total score: 12.
-2025-11-28 21:38:43,162 - __main__ - INFO - Player Marius scored 4 this round. Total score: 4.
-2025-11-28 21:38:43,162 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,162 - __main__ - INFO - Card drawn: 8
-2025-11-28 21:38:43,162 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,162 - __main__ - INFO - Card drawn: +8
-2025-11-28 21:38:43,162 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,162 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,162 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,162 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,163 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,163 - __main__ - INFO - Card drawn: 12
-2025-11-28 21:38:43,163 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,163 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,163 - __main__ - INFO - Player Thea busted.
-2025-11-28 21:38:43,163 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,163 - __main__ - INFO - Player Marius decided to stop drawing cards.
-2025-11-28 21:38:43,163 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,163 - __main__ - INFO - Player Thea score: 0 hand: ['11', '11'] bonus: ['+8'] special_cards_log: [] busted: True
-2025-11-28 21:38:43,163 - __main__ - INFO - Player Marius score: 31 hand: ['8', '11', '12'] bonus: [] special_cards_log: [] busted: False
-2025-11-28 21:38:43,163 - __main__ - INFO - Player Thea scored 0 this round. Total score: 12.
-2025-11-28 21:38:43,163 - __main__ - INFO - Player Marius scored 31 this round. Total score: 35.
-2025-11-28 21:38:43,163 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,163 - __main__ - INFO - Card drawn: 1
-2025-11-28 21:38:43,163 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,163 - __main__ - INFO - Card drawn: +4
-2025-11-28 21:38:43,163 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,163 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,163 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,163 - __main__ - INFO - Card drawn: 7
-2025-11-28 21:38:43,163 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,163 - __main__ - INFO - Card drawn: 6
-2025-11-28 21:38:43,163 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,164 - __main__ - INFO - Card drawn: second_chance
-2025-11-28 21:38:43,164 - __main__ - INFO - Player Marius received second chance special card.
-2025-11-28 21:38:43,164 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,164 - __main__ - INFO - Card drawn: 9
-2025-11-28 21:38:43,164 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,164 - __main__ - INFO - Card drawn: 2
-2025-11-28 21:38:43,164 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,164 - __main__ - INFO - Player Thea decided to stop drawing cards.
-2025-11-28 21:38:43,164 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,164 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,164 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,164 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,164 - __main__ - INFO - Player Marius busted but used second chance.
-2025-11-28 21:38:43,164 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,164 - __main__ - INFO - Card drawn: 9
-2025-11-28 21:38:43,164 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,164 - __main__ - INFO - Player Marius decided to stop drawing cards.
-2025-11-28 21:38:43,164 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,164 - __main__ - INFO - Player Thea score: 27 hand: ['1', '11', '6', '9'] bonus: [] special_cards_log: [] busted: False
-2025-11-28 21:38:43,164 - __main__ - INFO - Player Marius score: 33 hand: ['7', '2', '11', '9'] bonus: ['+4'] special_cards_log: ['second_chance'] busted: False
-2025-11-28 21:38:43,164 - __main__ - INFO - Player Thea scored 27 this round. Total score: 39.
-2025-11-28 21:38:43,164 - __main__ - INFO - Player Marius scored 33 this round. Total score: 68.
-2025-11-28 21:38:43,164 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,165 - __main__ - INFO - Card drawn: 10
-2025-11-28 21:38:43,165 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,165 - __main__ - INFO - Card drawn: 10
-2025-11-28 21:38:43,165 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,165 - __main__ - INFO - Card drawn: +8
-2025-11-28 21:38:43,165 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,165 - __main__ - INFO - Card drawn: 2
-2025-11-28 21:38:43,165 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,165 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,165 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,165 - __main__ - INFO - Card drawn: 10
-2025-11-28 21:38:43,165 - __main__ - INFO - Player Thea busted.
-2025-11-28 21:38:43,165 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,165 - __main__ - INFO - Player Marius decided to stop drawing cards.
-2025-11-28 21:38:43,165 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,165 - __main__ - INFO - Player Thea score: 0 hand: ['10', '2', '10'] bonus: [] special_cards_log: [] busted: True
-2025-11-28 21:38:43,165 - __main__ - INFO - Player Marius score: 29 hand: ['10', '11'] bonus: ['+8'] special_cards_log: [] busted: False
-2025-11-28 21:38:43,165 - __main__ - INFO - Player Thea scored 0 this round. Total score: 39.
-2025-11-28 21:38:43,165 - __main__ - INFO - Player Marius scored 29 this round. Total score: 97.
-2025-11-28 21:38:43,165 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,165 - __main__ - INFO - Card drawn: 8
-2025-11-28 21:38:43,165 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,165 - __main__ - INFO - Card drawn: second_chance
-2025-11-28 21:38:43,166 - __main__ - INFO - Player Marius received second chance special card.
-2025-11-28 21:38:43,166 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,166 - __main__ - INFO - Card drawn: 3
-2025-11-28 21:38:43,166 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,166 - __main__ - INFO - Card drawn: 12
-2025-11-28 21:38:43,166 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,166 - __main__ - INFO - Card drawn: +6
-2025-11-28 21:38:43,166 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,166 - __main__ - INFO - Card drawn: 12
-2025-11-28 21:38:43,166 - __main__ - INFO - Player Marius busted but used second chance.
-2025-11-28 21:38:43,166 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,166 - __main__ - INFO - Card drawn: +8
-2025-11-28 21:38:43,166 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,166 - __main__ - INFO - Card drawn: 12
-2025-11-28 21:38:43,166 - __main__ - INFO - Player Marius busted.
-2025-11-28 21:38:43,166 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,166 - __main__ - INFO - Player Thea decided to stop drawing cards.
-2025-11-28 21:38:43,166 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,166 - __main__ - INFO - Player Marius score: 0 hand: ['12', '12'] bonus: [] special_cards_log: ['second_chance'] busted: True
-2025-11-28 21:38:43,166 - __main__ - INFO - Player Thea score: 25 hand: ['8', '3'] bonus: ['+6', '+8'] special_cards_log: [] busted: False
-2025-11-28 21:38:43,166 - __main__ - INFO - Player Marius scored 0 this round. Total score: 97.
-2025-11-28 21:38:43,166 - __main__ - INFO - Player Thea scored 25 this round. Total score: 64.
-2025-11-28 21:38:43,166 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,166 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,167 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,167 - __main__ - INFO - Card drawn: 9
-2025-11-28 21:38:43,167 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,167 - __main__ - INFO - Card drawn: 7
-2025-11-28 21:38:43,167 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,167 - __main__ - INFO - Card drawn: 7
-2025-11-28 21:38:43,167 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,167 - __main__ - INFO - Card drawn: x2
-2025-11-28 21:38:43,167 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,167 - __main__ - INFO - Card drawn: 2
-2025-11-28 21:38:43,167 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,167 - __main__ - INFO - Player Marius decided to stop drawing cards.
-2025-11-28 21:38:43,167 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,167 - __main__ - INFO - Card drawn: 5
-2025-11-28 21:38:43,167 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,167 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,167 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,167 - __main__ - INFO - Player Thea decided to stop drawing cards.
-2025-11-28 21:38:43,167 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,167 - __main__ - INFO - Player Marius score: 36 hand: ['11', '7'] bonus: ['x2'] special_cards_log: [] busted: False
-2025-11-28 21:38:43,167 - __main__ - INFO - Player Thea score: 34 hand: ['9', '7', '2', '5', '11'] bonus: [] special_cards_log: [] busted: False
-2025-11-28 21:38:43,167 - __main__ - INFO - Player Marius scored 36 this round. Total score: 133.
-2025-11-28 21:38:43,167 - __main__ - INFO - Player Thea scored 34 this round. Total score: 98.
-2025-11-28 21:38:43,168 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,168 - __main__ - INFO - Card drawn: 1
-2025-11-28 21:38:43,168 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,168 - __main__ - INFO - Card drawn: 8
-2025-11-28 21:38:43,168 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,168 - __main__ - INFO - Card drawn: x2
-2025-11-28 21:38:43,168 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,168 - __main__ - INFO - Card drawn: 10
-2025-11-28 21:38:43,168 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,168 - __main__ - INFO - Card drawn: 8
-2025-11-28 21:38:43,168 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,168 - __main__ - INFO - Card drawn: 10
-2025-11-28 21:38:43,168 - __main__ - INFO - Player Marius busted.
-2025-11-28 21:38:43,168 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,168 - __main__ - INFO - Card drawn: +6
-2025-11-28 21:38:43,168 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,168 - __main__ - INFO - Card drawn: 6
-2025-11-28 21:38:43,168 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,168 - __main__ - INFO - Player Thea decided to stop drawing cards.
-2025-11-28 21:38:43,168 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,168 - __main__ - INFO - Player Marius score: 0 hand: ['8', '10', '10'] bonus: [] special_cards_log: [] busted: True
-2025-11-28 21:38:43,168 - __main__ - INFO - Player Thea score: 36 hand: ['1', '8', '6'] bonus: ['x2', '+6'] special_cards_log: [] busted: False
-2025-11-28 21:38:43,168 - __main__ - INFO - Player Marius scored 0 this round. Total score: 133.
-2025-11-28 21:38:43,168 - __main__ - INFO - Player Thea scored 36 this round. Total score: 134.
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 8
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 12
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 9
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 9
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: draw_3
-2025-11-28 21:38:43,169 - __main__ - INFO - Player Marius chose to give draw 3 to Player Thea.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 9
-2025-11-28 21:38:43,169 - __main__ - INFO - Player Thea busted.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 4
-2025-11-28 21:38:43,169 - __main__ - INFO - Player Thea busted.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 12
-2025-11-28 21:38:43,169 - __main__ - INFO - Player Thea busted.
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 0
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 5
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 2
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,169 - __main__ - INFO - Card drawn: 7
-2025-11-28 21:38:43,169 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Marius decided to stop drawing cards.
-2025-11-28 21:38:43,170 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Thea score: 0 hand: ['12', '9', '9', '4', '12'] bonus: [] special_cards_log: [] busted: True
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Marius score: 31 hand: ['8', '9', '0', '5', '2', '7'] bonus: [] special_cards_log: ['draw_3'] busted: False
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Thea scored 0 this round. Total score: 134.
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Marius scored 31 this round. Total score: 164.
-2025-11-28 21:38:43,170 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,170 - __main__ - INFO - Card drawn: 5
-2025-11-28 21:38:43,170 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,170 - __main__ - INFO - Card drawn: 10
-2025-11-28 21:38:43,170 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,170 - __main__ - INFO - Card drawn: +10
-2025-11-28 21:38:43,170 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,170 - __main__ - INFO - Card drawn: 6
-2025-11-28 21:38:43,170 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,170 - __main__ - INFO - Card drawn: 5
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Thea busted.
-2025-11-28 21:38:43,170 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,170 - __main__ - INFO - Card drawn: 4
-2025-11-28 21:38:43,170 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,170 - __main__ - INFO - Card drawn: 8
-2025-11-28 21:38:43,170 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Marius decided to stop drawing cards.
-2025-11-28 21:38:43,170 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Thea score: 0 hand: ['5', '5'] bonus: ['+10'] special_cards_log: [] busted: True
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Marius score: 28 hand: ['10', '6', '4', '8'] bonus: [] special_cards_log: [] busted: False
-2025-11-28 21:38:43,170 - __main__ - INFO - Player Thea scored 0 this round. Total score: 134.
-2025-11-28 21:38:43,171 - __main__ - INFO - Player Marius scored 28 this round. Total score: 192.
-2025-11-28 21:38:43,171 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,171 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,171 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,171 - __main__ - INFO - Card drawn: 12
-2025-11-28 21:38:43,171 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,171 - __main__ - INFO - Card drawn: 9
-2025-11-28 21:38:43,171 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,171 - __main__ - INFO - Card drawn: 11
-2025-11-28 21:38:43,171 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,171 - __main__ - INFO - Card drawn: second_chance
-2025-11-28 21:38:43,171 - __main__ - INFO - Player Marius received second chance special card.
-2025-11-28 21:38:43,171 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,171 - __main__ - INFO - Card drawn: 8
-2025-11-28 21:38:43,171 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,171 - __main__ - INFO - Card drawn: 7
-2025-11-28 21:38:43,171 - __main__ - INFO - Player: Thea turn.
-2025-11-28 21:38:43,171 - __main__ - INFO - Player Thea decided to stop drawing cards.
-2025-11-28 21:38:43,171 - __main__ - INFO - Player: Marius turn.
-2025-11-28 21:38:43,171 - __main__ - INFO - Player Marius decided to stop drawing cards.
-2025-11-28 21:38:43,171 - __main__ - INFO - Player scores:
-2025-11-28 21:38:43,172 - __main__ - INFO - Player Thea score: 31 hand: ['12', '11', '8'] bonus: [] special_cards_log: [] busted: False
-2025-11-28 21:38:43,172 - __main__ - INFO - Player Marius score: 27 hand: ['11', '9', '7'] bonus: [] special_cards_log: ['second_chance'] busted: False
-2025-11-28 21:38:43,172 - __main__ - INFO - Player Thea scored 31 this round. Total score: 165.
-2025-11-28 21:38:43,172 - __main__ - INFO - Player Marius scored 27 this round. Total score: 219.
-2025-11-28 21:38:43,172 - __main__ - INFO - Player Marius has won the game with a total score of 219!
-2025-11-28 21:38:43,172 - __main__ - INFO - Game finished.
+2025-11-28 21:50:30,125 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,125 - __main__ - INFO - Card drawn: 6
+2025-11-28 21:50:30,125 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,125 - __main__ - INFO - Card drawn: 9
+2025-11-28 21:50:30,125 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,125 - __main__ - INFO - Card drawn: 4
+2025-11-28 21:50:30,125 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,125 - __main__ - INFO - Card drawn: +4
+2025-11-28 21:50:30,125 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,125 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,125 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,125 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,125 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,125 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,125 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,126 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,126 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,126 - __main__ - INFO - Player Thea decided to stop drawing cards.
+2025-11-28 21:50:30,126 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,126 - __main__ - INFO - Player Marius decided to stop drawing cards.
+2025-11-28 21:50:30,126 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,126 - __main__ - INFO - Player Thea score: 30 hand: ['6', '4', '12', '8'] bonus: [] special_cards_log: [] busted: False
+2025-11-28 21:50:30,126 - __main__ - INFO - Player Marius score: 28 hand: ['9', '8', '7'] bonus: ['+4'] special_cards_log: [] busted: False
+2025-11-28 21:50:30,126 - __main__ - INFO - Player Thea scored 30 this round. Total score: 30.
+2025-11-28 21:50:30,126 - __main__ - INFO - Player Marius scored 28 this round. Total score: 28.
+2025-11-28 21:50:30,126 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,126 - __main__ - INFO - Card drawn: 5
+2025-11-28 21:50:30,126 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,126 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,126 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,126 - __main__ - INFO - Card drawn: 11
+2025-11-28 21:50:30,126 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,126 - __main__ - INFO - Card drawn: 5
+2025-11-28 21:50:30,126 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,126 - __main__ - INFO - Card drawn: 9
+2025-11-28 21:50:30,126 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,126 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,127 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,127 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,127 - __main__ - INFO - Player Marius decided to stop drawing cards.
+2025-11-28 21:50:30,127 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,127 - __main__ - INFO - Player Thea score: 0 hand: ['7', '5', '7'] bonus: [] special_cards_log: [] busted: True
+2025-11-28 21:50:30,127 - __main__ - INFO - Player Marius score: 25 hand: ['5', '11', '9'] bonus: [] special_cards_log: [] busted: False
+2025-11-28 21:50:30,127 - __main__ - INFO - Player Thea scored 0 this round. Total score: 30.
+2025-11-28 21:50:30,127 - __main__ - INFO - Player Marius scored 25 this round. Total score: 53.
+2025-11-28 21:50:30,127 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,127 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,127 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,127 - __main__ - INFO - Card drawn: 2
+2025-11-28 21:50:30,127 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,127 - __main__ - INFO - Card drawn: 11
+2025-11-28 21:50:30,127 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,127 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,128 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,128 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,128 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,128 - __main__ - INFO - Card drawn: 10
+2025-11-28 21:50:30,128 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,128 - __main__ - INFO - Player Thea decided to stop drawing cards.
+2025-11-28 21:50:30,128 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,128 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,128 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,128 - __main__ - INFO - Player Marius decided to stop drawing cards.
+2025-11-28 21:50:30,128 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,128 - __main__ - INFO - Player Thea score: 30 hand: ['7', '11', '12'] bonus: [] special_cards_log: [] busted: False
+2025-11-28 21:50:30,128 - __main__ - INFO - Player Marius score: 27 hand: ['2', '8', '10', '7'] bonus: [] special_cards_log: [] busted: False
+2025-11-28 21:50:30,128 - __main__ - INFO - Player Thea scored 30 this round. Total score: 60.
+2025-11-28 21:50:30,128 - __main__ - INFO - Player Marius scored 27 this round. Total score: 80.
+2025-11-28 21:50:30,128 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,128 - __main__ - INFO - Card drawn: 6
+2025-11-28 21:50:30,128 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,128 - __main__ - INFO - Card drawn: 10
+2025-11-28 21:50:30,128 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,128 - __main__ - INFO - Card drawn: +2
+2025-11-28 21:50:30,128 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,129 - __main__ - INFO - Card drawn: 6
+2025-11-28 21:50:30,129 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,129 - __main__ - INFO - Card drawn: 11
+2025-11-28 21:50:30,129 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,129 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,129 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,129 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,129 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,129 - __main__ - INFO - Card drawn: draw_3
+2025-11-28 21:50:30,129 - __main__ - INFO - Player Thea chose to give draw 3 to Player Thea.
+2025-11-28 21:50:30,129 - __main__ - INFO - Card drawn: 4
+2025-11-28 21:50:30,129 - __main__ - INFO - Card drawn: 6
+2025-11-28 21:50:30,129 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,129 - __main__ - INFO - Card drawn: 11
+2025-11-28 21:50:30,129 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,129 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,129 - __main__ - INFO - Player Marius decided to stop drawing cards.
+2025-11-28 21:50:30,129 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,129 - __main__ - INFO - Player Thea score: 0 hand: ['10', '6', '7', '4', '6', '11'] bonus: [] special_cards_log: ['draw_3'] busted: True
+2025-11-28 21:50:30,129 - __main__ - INFO - Player Marius score: 31 hand: ['6', '11', '12'] bonus: ['+2'] special_cards_log: [] busted: False
+2025-11-28 21:50:30,129 - __main__ - INFO - Player Thea scored 0 this round. Total score: 60.
+2025-11-28 21:50:30,129 - __main__ - INFO - Player Marius scored 31 this round. Total score: 111.
+2025-11-28 21:50:30,129 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,129 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,130 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,130 - __main__ - INFO - Card drawn: +8
+2025-11-28 21:50:30,130 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,130 - __main__ - INFO - Card drawn: second_chance
+2025-11-28 21:50:30,130 - __main__ - INFO - Player Thea received second chance special card.
+2025-11-28 21:50:30,130 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,130 - __main__ - INFO - Card drawn: 2
+2025-11-28 21:50:30,130 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,130 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,130 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,130 - __main__ - INFO - Card drawn: 5
+2025-11-28 21:50:30,130 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,130 - __main__ - INFO - Card drawn: 6
+2025-11-28 21:50:30,130 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,130 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,130 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,130 - __main__ - INFO - Card drawn: freeze
+2025-11-28 21:50:30,130 - __main__ - INFO - Player Thea chose to freeze Player Marius.
+2025-11-28 21:50:30,130 - __main__ - INFO - Player Marius has been frozen and cannot draw more cards this round.
+2025-11-28 21:50:30,130 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,130 - __main__ - INFO - Card drawn: 5
+2025-11-28 21:50:30,131 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,131 - __main__ - INFO - Player Thea decided to stop drawing cards.
+2025-11-28 21:50:30,131 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,131 - __main__ - INFO - Player Marius score: 27 hand: ['2', '5', '12'] bonus: ['+8'] special_cards_log: [] busted: False
+2025-11-28 21:50:30,131 - __main__ - INFO - Player Thea score: 26 hand: ['8', '7', '6', '5'] bonus: [] special_cards_log: ['second_chance', 'freeze'] busted: False
+2025-11-28 21:50:30,131 - __main__ - INFO - Player Marius scored 27 this round. Total score: 138.
+2025-11-28 21:50:30,131 - __main__ - INFO - Player Thea scored 26 this round. Total score: 86.
+2025-11-28 21:50:30,131 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,131 - __main__ - INFO - Card drawn: 3
+2025-11-28 21:50:30,131 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,131 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,131 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,131 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,131 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,131 - __main__ - INFO - Card drawn: +2
+2025-11-28 21:50:30,131 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,131 - __main__ - INFO - Card drawn: freeze
+2025-11-28 21:50:30,131 - __main__ - INFO - Player Marius chose to freeze Player Thea.
+2025-11-28 21:50:30,131 - __main__ - INFO - Player Thea has been frozen and cannot draw more cards this round.
+2025-11-28 21:50:30,132 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,132 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Marius busted.
+2025-11-28 21:50:30,132 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Thea score: 10 hand: ['8'] bonus: ['+2'] special_cards_log: [] busted: False
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Marius score: 0 hand: ['3', '12', '12'] bonus: [] special_cards_log: ['freeze'] busted: True
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Thea scored 10 this round. Total score: 96.
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Marius scored 0 this round. Total score: 138.
+2025-11-28 21:50:30,132 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,132 - __main__ - INFO - Card drawn: 10
+2025-11-28 21:50:30,132 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,132 - __main__ - INFO - Card drawn: 10
+2025-11-28 21:50:30,132 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,132 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,132 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,132 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,132 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,132 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,132 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,132 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Marius busted.
+2025-11-28 21:50:30,132 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Thea score: 0 hand: ['10', '8', '8'] bonus: [] special_cards_log: [] busted: True
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Marius score: 0 hand: ['10', '8', '8'] bonus: [] special_cards_log: [] busted: True
+2025-11-28 21:50:30,132 - __main__ - INFO - Player Thea scored 0 this round. Total score: 96.
+2025-11-28 21:50:30,133 - __main__ - INFO - Player Marius scored 0 this round. Total score: 138.
+2025-11-28 21:50:30,133 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,133 - __main__ - INFO - Card drawn: second_chance
+2025-11-28 21:50:30,133 - __main__ - INFO - Player Marius received second chance special card.
+2025-11-28 21:50:30,133 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,133 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,133 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,133 - __main__ - INFO - Card drawn: draw_3
+2025-11-28 21:50:30,133 - __main__ - INFO - Player Marius chose to give draw 3 to Player Thea.
+2025-11-28 21:50:30,133 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,133 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,133 - __main__ - INFO - Card drawn: 6
+2025-11-28 21:50:30,133 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,133 - __main__ - INFO - Card drawn: 2
+2025-11-28 21:50:30,133 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,133 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,133 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,133 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,133 - __main__ - INFO - Card drawn: 3
+2025-11-28 21:50:30,133 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,133 - __main__ - INFO - Card drawn: 11
+2025-11-28 21:50:30,133 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,133 - __main__ - INFO - Player Marius decided to stop drawing cards.
+2025-11-28 21:50:30,133 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,133 - __main__ - INFO - Player Thea score: 0 hand: ['12', '12', '6', '2'] bonus: [] special_cards_log: [] busted: True
+2025-11-28 21:50:30,134 - __main__ - INFO - Player Marius score: 26 hand: ['12', '3', '11'] bonus: [] special_cards_log: ['second_chance', 'draw_3'] busted: False
+2025-11-28 21:50:30,134 - __main__ - INFO - Player Thea scored 0 this round. Total score: 96.
+2025-11-28 21:50:30,134 - __main__ - INFO - Player Marius scored 26 this round. Total score: 164.
+2025-11-28 21:50:30,134 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,134 - __main__ - INFO - Card drawn: 9
+2025-11-28 21:50:30,134 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,134 - __main__ - INFO - Card drawn: 5
+2025-11-28 21:50:30,134 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,134 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,134 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,134 - __main__ - INFO - Card drawn: 3
+2025-11-28 21:50:30,134 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,134 - __main__ - INFO - Card drawn: 9
+2025-11-28 21:50:30,134 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,134 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,135 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: draw_3
+2025-11-28 21:50:30,135 - __main__ - INFO - Player Marius chose to give draw 3 to Player Marius.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: 5
+2025-11-28 21:50:30,135 - __main__ - INFO - Player Marius busted.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: 10
+2025-11-28 21:50:30,135 - __main__ - INFO - Player Marius busted.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,135 - __main__ - INFO - Player Marius busted.
+2025-11-28 21:50:30,135 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,135 - __main__ - INFO - Player Thea score: 0 hand: ['9', '12', '9'] bonus: [] special_cards_log: [] busted: True
+2025-11-28 21:50:30,135 - __main__ - INFO - Player Marius score: 0 hand: ['5', '3', '12', '5', '10', '7'] bonus: [] special_cards_log: ['draw_3'] busted: True
+2025-11-28 21:50:30,135 - __main__ - INFO - Player Thea scored 0 this round. Total score: 96.
+2025-11-28 21:50:30,135 - __main__ - INFO - Player Marius scored 0 this round. Total score: 164.
+2025-11-28 21:50:30,135 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,135 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: 1
+2025-11-28 21:50:30,135 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: 11
+2025-11-28 21:50:30,135 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: 2
+2025-11-28 21:50:30,135 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,135 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,135 - __main__ - INFO - Player Marius busted.
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Card drawn: 9
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Card drawn: 10
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Player Thea decided to stop drawing cards.
+2025-11-28 21:50:30,136 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,136 - __main__ - INFO - Player Marius score: 0 hand: ['7', '11', '7'] bonus: [] special_cards_log: [] busted: True
+2025-11-28 21:50:30,136 - __main__ - INFO - Player Thea score: 29 hand: ['1', '2', '9', '10', '7'] bonus: [] special_cards_log: [] busted: False
+2025-11-28 21:50:30,136 - __main__ - INFO - Player Marius scored 0 this round. Total score: 164.
+2025-11-28 21:50:30,136 - __main__ - INFO - Player Thea scored 29 this round. Total score: 125.
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Card drawn: 6
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Card drawn: 0
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Card drawn: 11
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,136 - __main__ - INFO - Card drawn: 3
+2025-11-28 21:50:30,136 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,137 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Marius busted.
+2025-11-28 21:50:30,137 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Thea decided to stop drawing cards.
+2025-11-28 21:50:30,137 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Marius score: 0 hand: ['7', '11', '3', '7'] bonus: [] special_cards_log: [] busted: True
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Thea score: 26 hand: ['6', '0', '8', '12'] bonus: [] special_cards_log: [] busted: False
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Marius scored 0 this round. Total score: 164.
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Thea scored 26 this round. Total score: 151.
+2025-11-28 21:50:30,137 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,137 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,137 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: draw_3
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Marius chose to give draw 3 to Player Marius.
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: 6
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: 4
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: second_chance
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Marius received second chance special card.
+2025-11-28 21:50:30,137 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: second_chance
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Thea received second chance special card.
+2025-11-28 21:50:30,137 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,137 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,137 - __main__ - INFO - Player Marius busted but used second chance.
+2025-11-28 21:50:30,138 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,138 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,138 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,138 - __main__ - INFO - Card drawn: +8
+2025-11-28 21:50:30,138 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,138 - __main__ - INFO - Card drawn: 11
+2025-11-28 21:50:30,138 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,138 - __main__ - INFO - Player Marius decided to stop drawing cards.
+2025-11-28 21:50:30,138 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,138 - __main__ - INFO - Player Thea decided to stop drawing cards.
+2025-11-28 21:50:30,138 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,138 - __main__ - INFO - Player Marius score: 26 hand: ['6', '4', '8'] bonus: ['+8'] special_cards_log: ['draw_3', 'second_chance'] busted: False
+2025-11-28 21:50:30,138 - __main__ - INFO - Player Thea score: 30 hand: ['7', '12', '11'] bonus: [] special_cards_log: ['second_chance'] busted: False
+2025-11-28 21:50:30,138 - __main__ - INFO - Player Marius scored 26 this round. Total score: 190.
+2025-11-28 21:50:30,138 - __main__ - INFO - Player Thea scored 30 this round. Total score: 181.
+2025-11-28 21:50:30,138 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,138 - __main__ - INFO - Card drawn: 11
+2025-11-28 21:50:30,138 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,138 - __main__ - INFO - Card drawn: 8
+2025-11-28 21:50:30,139 - __main__ - INFO - Player: Thea turn.
+2025-11-28 21:50:30,139 - __main__ - INFO - Card drawn: draw_3
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Thea chose to give draw 3 to Player Thea.
+2025-11-28 21:50:30,139 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,139 - __main__ - INFO - Card drawn: 7
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,139 - __main__ - INFO - Card drawn: draw_3
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Thea busted.
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Thea chose to give draw 3 to Player Marius.
+2025-11-28 21:50:30,139 - __main__ - INFO - Card drawn: 12
+2025-11-28 21:50:30,139 - __main__ - INFO - Card drawn: 5
+2025-11-28 21:50:30,139 - __main__ - INFO - Card drawn: 6
+2025-11-28 21:50:30,139 - __main__ - INFO - Player: Marius turn.
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Marius decided to stop drawing cards.
+2025-11-28 21:50:30,139 - __main__ - INFO - Player scores:
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Thea score: 0 hand: ['11', '7', '7'] bonus: [] special_cards_log: ['draw_3', 'draw_3'] busted: True
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Marius score: 31 hand: ['8', '12', '5', '6'] bonus: [] special_cards_log: [] busted: False
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Thea scored 0 this round. Total score: 181.
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Marius scored 31 this round. Total score: 221.
+2025-11-28 21:50:30,139 - __main__ - INFO - Player Marius has won the game with a total score of 221!
+2025-11-28 21:50:30,139 - __main__ - INFO - Game finished.
