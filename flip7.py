@@ -69,6 +69,50 @@ class DrawingStrategy(str, Enum):
     BELOW_3_CARDS = "below_3_cards"
 
 
+class Game(BaseModel):
+    """Plays multiple GameRounds until one player reaches 200 points."""
+    winning_score: int = Field(default=200, description="Score needed to win the game.")
+    finished: bool = Field(default=False, description="Boolean indicating if the game is finished.")
+    players: List[PlayerBase] = Field(..., description="List of Player objects participating in the game.")
+
+    def play(self):
+        while not self.finished:
+            game_round = GameRound(
+                players = deque(self.get_players_for_new_round()),
+                deck_remaining = card_decks["full_deck"]
+            )
+            while not game_round.finished:
+                game_round.next()
+            game_round.game_summary()
+            self.update_player_scores(game_round)
+            self.finished = self.check_game_finished()
+
+    def update_player_scores(self, game_round: GameRound):
+        for player in game_round.players:
+            round_score = count_score(player)
+            player.total_score += round_score
+            logger.info(f"Player {player.name} scored {round_score} this round. Total score: {player.total_score}.")
+
+    def check_game_finished(self):
+        for player in self.players:
+            if player.total_score >= self.winning_score:
+                logger.info(f"Player {player.name} has won the game with a total score of {player.total_score}!")
+                return True
+        return False
+
+    def get_players_for_new_round(self) -> List[PlayerBase]:
+        # Rotate starting players
+        self.players.append(self.players.pop(0))
+
+        # Reset player states for new round
+        for player in self.players:
+            player.done = False
+            player.busted = False
+            player.second_chance = False
+            player.hand = Hand()
+        return self.players
+
+
 class GameRound(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True) # Needed for random.Random type
 
@@ -110,7 +154,8 @@ class GameRound(BaseModel):
 
         self._execute_player_turn(player)
 
-        self.finished = self.check_game_finished()
+        self.finished = self.check_game_round_finished()
+
 
     def _execute_player_turn(self, player):
         if player.done or player.busted:
@@ -144,13 +189,13 @@ class GameRound(BaseModel):
         if drawn_card in SPECIAL_CARDS:
             if drawn_card == "freeze":
                 targeting_strategy: TargetingStrategy = player.decide_freeze_strategy(self)
-                target: Player = self.choose_player_by_targeting_strategy(player, targeting_strategy)
+                target: PlayerBase = self.choose_player_by_targeting_strategy(player, targeting_strategy)
                 logger.info(f"Player {player.name} chose to freeze Player {target.name}.")
                 self.apply_freeze_effect(target)
 
             if drawn_card == "draw_3":
                 targeting_strategy: TargetingStrategy = player.decide_draw_3_strategy(self)
-                target: Player = self.choose_player_by_targeting_strategy(player, targeting_strategy)
+                target: PlayerBase = self.choose_player_by_targeting_strategy(player, targeting_strategy)
                 logger.info(f"Player {player.name} chose to give draw 3 to Player {target.name}.")
                 self.apply_draw_3_effect(target)
 
@@ -176,7 +221,7 @@ class GameRound(BaseModel):
         for i in range(3):
             self._execute_player_draw(player)
     
-    def choose_player_by_targeting_strategy(self, chooser: Player, targeting_strategy: TargetingStrategy) -> PlayerBase:
+    def choose_player_by_targeting_strategy(self, chooser: PlayerBase, targeting_strategy: TargetingStrategy) -> PlayerBase:
         valid_players = [p for p in self.players if not p.done and not p.busted]
         if not valid_players:
             return None
@@ -193,7 +238,7 @@ class GameRound(BaseModel):
         else:
             raise ValueError("Invalid choose player option:", targeting_strategy)
 
-    def check_game_finished(self):
+    def check_game_round_finished(self):
         all_done = all(player.done or player.busted for player in self.players)
         if all_done:
             return True
@@ -245,6 +290,7 @@ class PlayerBase(BaseModel, ABC): # Abstract Base Class for Player
     busted: bool = Field(default=False, description="Boolean indicating if the player has busted this round.")
     second_chance: bool = Field(default=False, description="Boolean indicating if the player has a second chance special card to use against busting.")
     name: str = Field(default="Unknown Player", description="Name of the player.")
+    total_score: int = Field(default=0, description="Total score of the player across rounds.")
 
     hand: Hand = Field(default_factory=Hand, description="Player's hand containing normal and bonus cards.")
 
@@ -349,21 +395,11 @@ if __name__ == "__main__":
         AutomaticPlayer(name = "Thea"),
         #InteractivePlayer(name = "You"),
     ]
-    game_round = GameRound(
-        players = deque(players_state),
+    game = Game(
+        players = players_state,
         deck_remaining = card_decks["full_deck"]
     )
 
-    count = 0
-    while not game_round.finished:
-        game_round.next()
-        logger.info(f"len deck remaining: {len(game_round.deck_remaining)}.")
+    game.play()
 
-        count += 1
-        if count > 50:
-            logger.info("Max turns reached, ending game to avoid infinite loop.")
-            break
-
-    game_round.game_summary()
-
-
+    logger.info("Game finished.")
